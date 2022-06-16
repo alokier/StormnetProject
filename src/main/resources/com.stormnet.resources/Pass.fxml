@@ -40,7 +40,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.strormnet.project.Controller.StartController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #2E3348;" VBox.vgrow="ALWAYS">
       <children>
@@ -55,8 +55,8 @@
                </font>
             </Button>
             <TextField fx:id="LoginField" layoutX="96.0" layoutY="157.0" promptText="Login" />
-            <Label fx:id="CreateAcc" layoutX="96.0" layoutY="129.0" text="Create account" textFill="WHITE" />
-            <Label fx:id="ForgotPass" disable="true" layoutX="96.0" layoutY="226.0" text="Forgot password?" textFill="WHITE">
+            <Label fx:id="CreateAcc" layoutX="96.0" layoutY="129.0" onMouseEntered="#ChangeCursor" onMousePressed="#CreateAccountClicked" text="Create account" textFill="WHITE" />
+            <Label fx:id="forgotPassword" layoutX="104.0" layoutY="226.0" onMouseClicked="#ForgotPasswordClicked" onMouseEntered="#ForgotPasswordChangeCursor" text="Forgot password?" textFill="WHITE" visible="false">
                <font>
                   <Font name="Ink Free" size="12.0" />
                </font>

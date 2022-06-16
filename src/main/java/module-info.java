@@ -3,8 +3,8 @@ module com.example.stormnetproject {
     requires javafx.fxml;
 
 
-    opens com.example.stormnetproject to javafx.fxml;
-    exports com.example.stormnetproject;
-    exports com.example.stormnetproject.Controller;
-    opens com.example.stormnetproject.Controller to javafx.fxml;
+    opens com.strormnet.project to javafx.fxml;
+    exports com.strormnet.project;
+    exports com.strormnet.project.Controller;
+    opens com.strormnet.project.Controller to javafx.fxml;
 }
