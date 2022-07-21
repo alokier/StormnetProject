@@ -1,6 +1,7 @@
 module com.example.stormnetproject {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.strormnet.project to javafx.fxml;
