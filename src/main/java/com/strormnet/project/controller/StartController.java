@@ -1,4 +1,4 @@
-package com.strormnet.project.Controller;
+package com.strormnet.project.controller;
 
 import java.io.IOException;
 import java.net.URL;

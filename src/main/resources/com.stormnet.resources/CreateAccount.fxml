@@ -40,27 +40,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.strormnet.project.controller.StartController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.strormnet.project.controller.CreateAccount">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #2E3348;" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="55.0" layoutY="95.0" prefHeight="34.0" prefWidth="228.0" text="Stormnet Login" textFill="#ffcc00">
+            <Label layoutX="22.0" layoutY="27.0" prefHeight="34.0" prefWidth="294.0" text="Stormnet Create Account" textFill="#ffcc00">
                <font>
                   <Font name="Impact" size="28.0" />
                </font></Label>
-            <PasswordField fx:id="PasswordField" layoutX="96.0" layoutY="200.0" promptText="Password" />
-            <Button fx:id="LoginButton" layoutX="150.0" layoutY="250.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: F39C63;" text="Login">
+            <Button fx:id="LoginButton" layoutX="113.0" layoutY="324.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F39C63;" text="Create">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="LoginField" layoutX="96.0" layoutY="157.0" promptText="Login" />
-            <Label fx:id="CreateAcc" layoutX="96.0" layoutY="129.0" onMouseEntered="#ChangeCursor" onMousePressed="#CreateAccountClicked" text="Create account" textFill="WHITE" />
-            <Label fx:id="forgotPassword" layoutX="104.0" layoutY="226.0" onMouseClicked="#ForgotPasswordClicked" onMouseEntered="#ForgotPasswordChangeCursor" text="Forgot password?" textFill="WHITE" visible="false">
+            <TextField fx:id="NameField" layoutX="38.0" layoutY="85.0" promptText="Name*" />
+            <PasswordField fx:id="PasswordField" layoutX="38.0" layoutY="237.0" promptText="Create password*" />
+            <TextField fx:id="LoginField" layoutX="38.0" layoutY="187.0" promptText="Login*" />
+            <TextField fx:id="LastNameField" layoutX="38.0" layoutY="133.0" promptText="Last name*" />
+            <Button fx:id="BackButton" layoutX="22.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#BackClicked" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: gray;" text="Back">
                <font>
-                  <Font name="Ink Free" size="12.0" />
+                  <Font name="Georgia" size="12.0" />
                </font>
-            </Label>
+            </Button>
       </children>
     </AnchorPane>
   </children>

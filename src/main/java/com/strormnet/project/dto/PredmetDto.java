@@ -1,12 +1,16 @@
-package model;
+package com.strormnet.project.dto;
 
-public class Predmet {
+public class PredmetDto {
+    private Integer id;
     private String nazvaniePredmeta;
     private String typePredmeta;
 
-    public Predmet(String nazvaniePredmeta, String typePredmeta) {
-        this.nazvaniePredmeta = nazvaniePredmeta;
-        this.typePredmeta = typePredmeta;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNazvaniePredmeta() {
@@ -23,13 +27,5 @@ public class Predmet {
 
     public void setTypePredmeta(String typePredmeta) {
         this.typePredmeta = typePredmeta;
-    }
-
-    @Override
-    public String toString() {
-        return "Predmet{" +
-                "nazvaniePredmeta='" + nazvaniePredmeta + '\'' +
-                ", typePredmeta='" + typePredmeta + '\'' +
-                '}';
     }
 }

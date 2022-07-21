@@ -1,4 +1,4 @@
-module com.example.stormnetproject {
+module com.strormnet.project {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
@@ -6,6 +6,11 @@ module com.example.stormnetproject {
 
     opens com.strormnet.project to javafx.fxml;
     exports com.strormnet.project;
-    exports com.strormnet.project.Controller;
-    opens com.strormnet.project.Controller to javafx.fxml;
+    opens com.strormnet.project.controller to javafx.fxml;
+    opens com.strormnet.project.enums to javafx.fxml;
+    exports com.strormnet.project.enums;
+
+    exports com.strormnet.project.model;
+    exports com.strormnet.project.dao;
+
 }
