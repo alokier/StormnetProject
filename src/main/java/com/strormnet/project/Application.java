@@ -3,14 +3,15 @@ package com.strormnet.project;
 import com.strormnet.project.dao.impl.PredmetRepositoryImpl;
 import com.strormnet.project.enums.PredmetType;
 import com.strormnet.project.model.Predmet;
-import com.strormnet.project.servant.Validation.Threads.CheckAdminsThread;
-import com.strormnet.project.servant.Validation.Threads.TakeFromDataBaseThread;
+import com.strormnet.project.servant.Validation.Threads.GetAdminsFromDataBaseThread;
+import com.strormnet.project.servant.Validation.Threads.GetPrepodavatelFromDataBaseThread;
 import com.strormnet.project.servant.Validation.Validation;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.Semaphore;
 
 public class Application extends javafx.application.Application {
     @Override
@@ -26,18 +27,6 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Validation validation = new Validation(123,"admin");
-        CheckAdminsThread checkAdminsThread = new CheckAdminsThread(validation);
-        TakeFromDataBaseThread takeFromDataBaseThread = new TakeFromDataBaseThread(validation);
-        checkAdminsThread.start();
-        takeFromDataBaseThread.start();
-        checkAdminsThread.join();
-        takeFromDataBaseThread.join();
-        System.out.println(validation.test());
-        System.out.println(validation.getAdmins());
-        System.out.println(validation.getPrepodavatels());
         launch();
-        //TODO перевесить логику на кнопку и проверить как она работает
-
     }
 }

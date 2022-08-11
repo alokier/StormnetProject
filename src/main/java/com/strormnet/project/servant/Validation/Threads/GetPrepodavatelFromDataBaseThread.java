@@ -8,26 +8,37 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.Semaphore;
 
-public class CheckAdminsThread extends Thread{
+public class GetPrepodavatelFromDataBaseThread extends Thread{
 
     private Validation validation;
+    private Semaphore semaphore;
 
-    public CheckAdminsThread(Validation validation) {
+
+    public GetPrepodavatelFromDataBaseThread(Validation validation, Semaphore semaphore) {
         this.validation = validation;
+        this.semaphore = semaphore;
     }
 
     @Override
     public void run() {
+        try {
+            semaphore.acquire(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Connection connection = new ConnectDao().getConnection();
-        String sqlCommand = "select * from admins;";
+        String sqlCommand = "select * from prepodavatel;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet != null && resultSet.next()) {
-                validation.putAdmin(HelperDao.populateAdmin(resultSet));
+                validation.putUser(HelperDao.populatePrepodavatel(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            semaphore.release(100);
         }
     }
 

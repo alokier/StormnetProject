@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.strormnet.project.servant.Validation.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -38,7 +39,20 @@ public class StartController {
     @FXML
     private PasswordField PasswordField;
 
+    @FXML
+    private Label incorrectPassword;
+
     Stage stage;
+
+    @FXML
+    void onMouseClickedOnLoginField(MouseEvent event) {
+        LoginField.setStyle(null);
+    }
+
+    @FXML
+    void onMouseClickedOnPasswordField(MouseEvent event) {
+        PasswordField.setStyle(null);
+    }
 
     @FXML
     protected void CreateAccountClicked(MouseEvent event) throws IOException {
@@ -56,6 +70,23 @@ public class StartController {
     protected void ForgotPasswordClicked(MouseEvent event) {
         System.out.println("ForgotPAss nagata");
         //TODO Реализовать метод
+    }
+
+    @FXML
+    void onClickedValidation(MouseEvent event) {
+        try{
+            Validation validation = new Validation(Integer.parseInt(LoginField.getText()),PasswordField.getText());
+            validation.startValidation();
+        } catch (NumberFormatException e) {
+            incorrectPassword.setVisible(true);
+            LoginField.setText("");
+            LoginField.setStyle("-fx-border-color:red");
+            PasswordField.setText("");
+            PasswordField.setStyle("-fx-border-color:red");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
