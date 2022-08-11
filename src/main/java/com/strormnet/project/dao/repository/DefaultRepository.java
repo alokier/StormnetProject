@@ -1,4 +1,4 @@
-package com.strormnet.project.dao;
+package com.strormnet.project.dao.repository;
 
 import java.util.List;
 

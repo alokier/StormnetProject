@@ -1,7 +1,7 @@
 package com.strormnet.project.dao.impl;
 
 import com.strormnet.project.dao.ConnectDao;
-import com.strormnet.project.dao.PredmetRepository;
+import com.strormnet.project.dao.repository.PredmetRepository;
 import com.strormnet.project.model.Predmet;
 
 import static com.strormnet.project.dao.HelperDao.populatePredmet;
@@ -47,8 +47,8 @@ public class PredmetRepositoryImpl implements PredmetRepository {
     public void updateById(Integer id, Predmet entity) {
         Connection connection = new ConnectDao().getConnection();
         String sqlCommand = "UPDATE predmet" +
-                " SET nazvanie = '" + entity.getNazvaniePredmeta() + "'"
-                + ", type = '" + entity.getTypePredmeta().toString() + "'"
+                " SET nazvanie = '" + entity.getNazvanie() + "'"
+                + ", type = '" + entity.getType().toString() + "'"
                 + " WHERE id = " + id + ";";
         try (Statement statement = connection.createStatement()) {
             if (statement != null) {
@@ -77,8 +77,8 @@ public class PredmetRepositoryImpl implements PredmetRepository {
         Connection connection = new ConnectDao().getConnection();
         String sqlCommand = "insert into stormnet.predmet (nazvanie, type) values (?, ?);";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);) {
-            preparedStatement.setString(1, entity.getNazvaniePredmeta());
-            preparedStatement.setString(2, entity.getTypePredmeta().toString());
+            preparedStatement.setString(1, entity.getNazvanie());
+            preparedStatement.setString(2, entity.getType().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

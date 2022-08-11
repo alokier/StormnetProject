@@ -4,33 +4,33 @@ package com.strormnet.project.model;
 import com.strormnet.project.enums.PredmetType;
 
 public class Predmet {
-    private String nazvaniePredmeta;
-    private PredmetType typePredmeta;
+    private String nazvanie;
+    private PredmetType type;
     private Integer id;
 
-    public Predmet(String nazvaniePredmeta, PredmetType typePredmeta) {
-        this.nazvaniePredmeta = nazvaniePredmeta;
-        this.typePredmeta = typePredmeta;
+    public Predmet(String nazvanie, PredmetType type) {
+        this.nazvanie = nazvanie;
+        this.type = type;
     }
 
     public Predmet(){
 
     }
 
-    public String getNazvaniePredmeta() {
-        return nazvaniePredmeta;
+    public String getNazvanie() {
+        return nazvanie;
     }
 
-    public void setNazvaniePredmeta(String nazvaniePredmeta) {
-        this.nazvaniePredmeta = nazvaniePredmeta;
+    public void setNazvanie(String nazvanie) {
+        this.nazvanie = nazvanie;
     }
 
-    public PredmetType getTypePredmeta() {
-        return typePredmeta;
+    public PredmetType getType() {
+        return type;
     }
 
-    public void setTypePredmeta(PredmetType typePredmeta) {
-        this.typePredmeta = typePredmeta;
+    public void setType(PredmetType type) {
+        this.type = type;
     }
 
     public Integer getId() {
@@ -44,8 +44,8 @@ public class Predmet {
     @Override
     public String toString() {
         return "Predmet{" +
-                "nazvaniePredmeta='" + nazvaniePredmeta + '\'' +
-                ", typePredmeta='" + typePredmeta + '\'' +
+                "nazvaniePredmeta='" + nazvanie + '\'' +
+                ", typePredmeta='" + type + '\'' +
                 '}';
     }
 }
