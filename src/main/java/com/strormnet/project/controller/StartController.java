@@ -2,8 +2,11 @@ package com.strormnet.project.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.strormnet.project.model.users.User;
+import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.Validation.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,17 +79,20 @@ public class StartController {
     void onClickedValidation(MouseEvent event) {
         try{
             Validation validation = new Validation(Integer.parseInt(LoginField.getText()),PasswordField.getText());
-            validation.startValidation();
+            User user = validation.startValidation();
+            Optional.ofNullable(user).ifPresentOrElse(gen -> {
+                System.out.println("Пользователь найден " + user);
+                incorrectPassword.setVisible(false);
+            }, () -> {
+                Servant.ErrorFieldStyle(false,LoginField, PasswordField);
+                incorrectPassword.setVisible(true);
+            });
         } catch (NumberFormatException e) {
             incorrectPassword.setVisible(true);
-            LoginField.setText("");
-            LoginField.setStyle("-fx-border-color:red");
-            PasswordField.setText("");
-            PasswordField.setStyle("-fx-border-color:red");
+            Servant.ErrorFieldStyle(false, LoginField,PasswordField);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML

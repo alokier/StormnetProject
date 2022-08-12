@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Semaphore;
 
+
 public class GetAdminsFromDataBaseThread extends Thread{
 
     private Validation validation;

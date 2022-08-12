@@ -23,11 +23,7 @@ public class GetPrepodavatelFromDataBaseThread extends Thread{
 
     @Override
     public void run() {
-        try {
-            semaphore.acquire(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        semaphore.release(50);
         Connection connection = new ConnectDao().getConnection();
         String sqlCommand = "select * from prepodavatel;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand)) {

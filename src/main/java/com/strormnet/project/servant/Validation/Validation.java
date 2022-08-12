@@ -12,9 +12,9 @@ import java.util.concurrent.Semaphore;
 public class Validation {
 
     private List<User> users = new ArrayList<>();
-
     private Integer login;
     private String password;
+    private User user;
     private Semaphore semaphore = new Semaphore(100);
 
     public Validation(Integer login, String password) {
@@ -27,20 +27,25 @@ public class Validation {
         users.add(user);
     }
 
-    public <T extends User> void removeFromUser(Integer index){
-        users.remove(index);
-    }
-
-
-    public void startValidation() throws InterruptedException {
+    public User startValidation() throws InterruptedException {
         GetAdminsFromDataBaseThread getAdminsFromDataBaseThread = new GetAdminsFromDataBaseThread(this, semaphore);
         GetPrepodavatelFromDataBaseThread getPrepodavatelFromDataBaseThread = new GetPrepodavatelFromDataBaseThread(this, semaphore);
         CheckAdminsPrepodavatelThread checkAdminsPrepodavatelThread = new CheckAdminsPrepodavatelThread(this, semaphore);
         getAdminsFromDataBaseThread.start();
         getPrepodavatelFromDataBaseThread.start();
-        System.out.println(getUsers());
         checkAdminsPrepodavatelThread.start();
-        System.out.println(getUsers());
+        checkAdminsPrepodavatelThread.join();
+        System.out.println(getFoundedUser());
+        return getFoundedUser();
+        }
+
+
+    public User getFoundedUser() {
+        return user;
+    }
+
+    public void setFoundedUser(User user) {
+        this.user = user;
     }
 
     public List<User> getUsers() {
@@ -67,11 +72,4 @@ public class Validation {
         this.password = password;
     }
 
-//    public Semaphore getSemaphore() {
-//        return semaphore;
-//    }
-//
-//    public void setSemaphore(Semaphore semaphore) {
-//        this.semaphore = semaphore;
-//    }
 }
