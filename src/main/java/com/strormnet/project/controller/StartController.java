@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.strormnet.project.model.users.Admin;
 import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Servant;
@@ -52,7 +51,6 @@ public class StartController {
     @FXML
     void LoginOnMousePressed(MouseEvent event) {
         LoginButton.setStyle("-fx-background-color:F39C63");
-
     }
 
     @FXML

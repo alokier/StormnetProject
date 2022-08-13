@@ -29,12 +29,12 @@ public class Validation {
         getAdminsFromDataBaseThread.start();
         getPrepodavatelFromDataBaseThread.start();
         getPrepodavatelFromDataBaseThread.join();
-        if(getFoundedUser().getClass().isInstance(Prepodavatel.class)){
+        if(getFoundedUser().equals(Prepodavatel.class)){
             System.out.println("Вернул препода");
             Prepodavatel prepodavatel = getFoundedUser();
             return (T) prepodavatel;
         }
-        if(getFoundedUser().getClass().isInstance(Admin.class)){
+        if(getFoundedUser().equals(Admin.class)){
             System.out.println("Вернул админа");
             Admin admin = getFoundedUser();
             return (T) getFoundedUser();
