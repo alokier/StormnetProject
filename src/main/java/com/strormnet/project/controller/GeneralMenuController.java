@@ -3,6 +3,7 @@ package com.strormnet.project.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.strormnet.project.model.users.Admin;
 import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.model.users.User;
 import javafx.fxml.FXML;
@@ -10,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 
-public class PrepodavatelMenuController {
+public class GeneralMenuController {
 
     @FXML
     private ResourceBundle resources;
@@ -31,18 +32,28 @@ public class PrepodavatelMenuController {
     private Label ProfileClickableLabel;
 
     @FXML
-    private Label ProfileClickableLabel1;
-
-    @FXML
-    private Label ProfileClickableLabel2;
-
-    @FXML
     private Button exitButton;
+
+    @FXML
+    private Label fioLabel;
 
     private Prepodavatel prepodavatel;
 
-    public void addData(Prepodavatel user){
-        prepodavatel = user;
+    private Admin admin;
+
+    public<T extends User> void addData(T user){
+        if(user.getClass().equals(Prepodavatel.class)){
+            prepodavatel = (Prepodavatel) user;
+        } else {
+            admin = (Admin) user;
+        }
     }
-    //TODO реализовать логику класса
+
+    @FXML
+    void initialize() {
+        System.out.println(prepodavatel);
+        System.out.println(admin);
+        fioLabel.setText(prepodavatel.getFio());
+
+    }
 }

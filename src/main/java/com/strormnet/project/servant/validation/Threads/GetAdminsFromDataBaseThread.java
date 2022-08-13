@@ -1,16 +1,14 @@
-package com.strormnet.project.servant.Validation.Threads;
+package com.strormnet.project.servant.validation.Threads;
 
 import com.strormnet.project.dao.ConnectDao;
 import com.strormnet.project.dao.HelperDao;
 import com.strormnet.project.model.users.Admin;
-import com.strormnet.project.model.users.User;
-import com.strormnet.project.servant.Validation.Validation;
+import com.strormnet.project.servant.validation.Validation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.Semaphore;
 
 
 public class GetAdminsFromDataBaseThread extends Thread{

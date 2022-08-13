@@ -5,10 +5,12 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.strormnet.project.Application;
+import com.strormnet.project.model.users.Admin;
 import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Servant;
-import com.strormnet.project.servant.Validation.Validation;
+import com.strormnet.project.servant.validation.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -77,25 +79,45 @@ public class StartController {
     @FXML
     void onClickedValidation(MouseEvent event) {
         try{
+            GeneralMenuController generalMenuController = new GeneralMenuController();
             Validation validation = new Validation(Integer.parseInt(LoginField.getText()),PasswordField.getText());
             User user = validation.startValidation();
-            Optional.ofNullable(user).ifPresentOrElse(gen -> {
+
+            boolean isNotNull = Optional.ofNullable(user).isPresent();
+            if(isNotNull) {
                 System.out.println("Пользователь найден " + user);
                 incorrectPassword.setVisible(false);
-                if(user.getClass().equals(Prepodavatel.class)){
+                if (user.getClass().equals(Prepodavatel.class)) {
                     Prepodavatel prepodavatel = (Prepodavatel) user;
-
-                    //TODO реализовать передачу в ПреподМеню контроллер
+                    generalMenuController.addData(prepodavatel);
+//                    Servant.onNextScene("/com.stormnet.resources/GeneralMenu.fxml", "Menu", generalMenuController, 620, 410);
                 }
-            }, () -> {
-                System.out.println("Пользователь не найден");
-                Servant.ErrorFieldStyle(false,LoginField, PasswordField);
-                incorrectPassword.setVisible(true);
-            });
+                if (user.getClass().equals(Admin.class)) {
+                    Admin admin = (Admin) user;
+                    generalMenuController.addData(admin);
+//                    Servant.onNextScene("/com.stormnet.resources/GeneralMenu.fxml", "Menu", generalMenuController, 620, 410);
+                } else {
+                    System.out.println("Пользователь не найден");
+                    Servant.ErrorFieldStyle(false, LoginField, PasswordField);
+                    incorrectPassword.setVisible(true);
+                }
+            }
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com.stormnet.resources/GeneralMenu.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 620, 410);
+            Stage stage2 = new Stage();
+            generalMenuController = (GeneralMenuController) fxmlLoader.getController();
+            stage2.setTitle("TBD");
+            stage2.setScene(scene);
+            stage2.show();
+            stage = (Stage) LoginButton.getScene().getWindow();
+            stage.close();
+
         } catch (NumberFormatException e) {
             incorrectPassword.setVisible(true);
             Servant.ErrorFieldStyle(false, LoginField,PasswordField);
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
