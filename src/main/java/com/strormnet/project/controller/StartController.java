@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.strormnet.project.model.users.Admin;
+import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.Validation.Validation;
@@ -48,6 +50,17 @@ public class StartController {
     Stage stage;
 
     @FXML
+    void LoginOnMousePressed(MouseEvent event) {
+        LoginButton.setStyle("-fx-background-color:F39C63");
+
+    }
+
+    @FXML
+    void LoginOnMouseReleased(MouseEvent event) {
+        LoginButton.setStyle("-fx-background-color: #0ca2e1");
+    }
+
+    @FXML
     void onMouseClickedOnLoginField(MouseEvent event) {
         LoginField.setStyle(null);
     }
@@ -55,18 +68,6 @@ public class StartController {
     @FXML
     void onMouseClickedOnPasswordField(MouseEvent event) {
         PasswordField.setStyle(null);
-    }
-
-    @FXML
-    protected void CreateAccountClicked(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.stormnet.resources/CreateAccount.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 350, 400);
-        Stage stage2 = new Stage();
-        stage2.setTitle("Create Account");
-        stage2.setScene(scene);
-        stage2.show();
-        stage = (Stage) LoginButton.getScene().getWindow();
-        stage.hide();
     }
 
     @FXML
@@ -83,7 +84,13 @@ public class StartController {
             Optional.ofNullable(user).ifPresentOrElse(gen -> {
                 System.out.println("Пользователь найден " + user);
                 incorrectPassword.setVisible(false);
+                if(user.getClass().equals(Prepodavatel.class)){
+                    Prepodavatel prepodavatel = (Prepodavatel) user;
+
+                    //TODO реализовать передачу в ПреподМеню контроллер
+                }
             }, () -> {
+                System.out.println("Пользователь не найден");
                 Servant.ErrorFieldStyle(false,LoginField, PasswordField);
                 incorrectPassword.setVisible(true);
             });
@@ -101,14 +108,21 @@ public class StartController {
     }
 
     @FXML
-    protected void ChangeCursor(MouseEvent event) {
-    CreateAcc.setCursor(Cursor.HAND);
-    }
-
-    @FXML
     void initialize() {
         LoginField.setFocusTraversable(false);
         PasswordField.setFocusTraversable(false);
+    }
+
+    @FXML
+    protected void CreateAccountClicked(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.stormnet.resources/CreateAccount.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 350, 400);
+        Stage stage2 = new Stage();
+        stage2.setTitle("Create Account");
+        stage2.setScene(scene);
+        stage2.show();
+        stage = (Stage) LoginButton.getScene().getWindow();
+        stage.hide();
     }
 
 }

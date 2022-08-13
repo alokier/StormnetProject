@@ -2,6 +2,8 @@ package com.strormnet.project.servant.Validation.Threads;
 
 import com.strormnet.project.dao.ConnectDao;
 import com.strormnet.project.dao.HelperDao;
+import com.strormnet.project.model.users.Prepodavatel;
+import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Validation.Validation;
 
 import java.sql.Connection;
@@ -13,28 +15,30 @@ import java.util.concurrent.Semaphore;
 public class GetPrepodavatelFromDataBaseThread extends Thread{
 
     private Validation validation;
-    private Semaphore semaphore;
 
 
-    public GetPrepodavatelFromDataBaseThread(Validation validation, Semaphore semaphore) {
+
+    public GetPrepodavatelFromDataBaseThread(Validation validation) {
         this.validation = validation;
-        this.semaphore = semaphore;
+
     }
 
     @Override
     public void run() {
-        semaphore.release(50);
+
         Connection connection = new ConnectDao().getConnection();
         String sqlCommand = "select * from prepodavatel;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet != null && resultSet.next()) {
-                validation.putUser(HelperDao.populatePrepodavatel(resultSet));
+                Prepodavatel prepodavatel = HelperDao.populatePrepodavatel(resultSet);
+                if(prepodavatel.getPhoneNumber().equals(validation.getLogin()) && prepodavatel.getPassword().equals(validation.getPassword())){
+                    validation.setFoundedUser(prepodavatel);
+                    break;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            semaphore.release(100);
         }
     }
 

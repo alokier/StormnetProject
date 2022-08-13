@@ -12,45 +12,45 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class CreateAccount {
+    public class CreateAccount {
 
-@FXML
-private ResourceBundle resources;
+    @FXML
+    private ResourceBundle resources;
 
-@FXML
-private URL location;
+    @FXML
+    private URL location;
 
-@FXML
-private TextField LastNameField;
+    @FXML
+    private TextField LastNameField;
 
-@FXML
-private Button LoginButton;
+    @FXML
+    private Button LoginButton;
 
-@FXML
-private TextField LoginField;
+    @FXML
+    private TextField LoginField;
 
-@FXML
-private Button BackButton;
+    @FXML
+    private Button BackButton;
 
-@FXML
-private TextField NameField;
+    @FXML
+    private TextField NameField;
 
-@FXML
-private PasswordField PasswordField;
+    @FXML
+    private PasswordField PasswordField;
 
-Stage stage;
+    Stage stage;
 
-@FXML
-void BackClicked(MouseEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.stormnet.resources/Pass.fxml"));
-    Scene scene = new Scene(fxmlLoader.load(), 540, 460);
-    Stage stage2 = new Stage();
-    stage2.setTitle("Create Account");
-    stage2.setScene(scene);
-    stage2.show();
-    stage = (Stage) LoginButton.getScene().getWindow();
-    stage.hide();
-}
+    @FXML
+    void BackClicked(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.stormnet.resources/Pass.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 540, 460);
+        Stage stage2 = new Stage();
+        stage2.setTitle("Create Account");
+        stage2.setScene(scene);
+        stage2.show();
+        stage = (Stage) LoginButton.getScene().getWindow();
+        stage.hide();
+    }
 
     @FXML
     void initialize() {
@@ -60,7 +60,5 @@ void BackClicked(MouseEvent event) throws IOException {
         PasswordField.setFocusTraversable(false);
 
     }
-
-
 }
 

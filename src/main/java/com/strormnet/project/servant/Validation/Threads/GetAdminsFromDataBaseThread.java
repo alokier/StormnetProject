@@ -2,6 +2,8 @@ package com.strormnet.project.servant.Validation.Threads;
 
 import com.strormnet.project.dao.ConnectDao;
 import com.strormnet.project.dao.HelperDao;
+import com.strormnet.project.model.users.Admin;
+import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Validation.Validation;
 
 import java.sql.Connection;
@@ -14,32 +16,29 @@ import java.util.concurrent.Semaphore;
 public class GetAdminsFromDataBaseThread extends Thread{
 
     private Validation validation;
-    private Semaphore semaphore;
 
 
-    public GetAdminsFromDataBaseThread(Validation validation, Semaphore semaphore) {
+    public GetAdminsFromDataBaseThread(Validation validation) {
         this.validation = validation;
-        this.semaphore = semaphore;
+
     }
 
     @Override
     public void run() {
-        try {
-            semaphore.acquire(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         Connection connection = new ConnectDao().getConnection();
         String sqlCommand = "select * from admins;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet != null && resultSet.next()) {
-                validation.putUser(HelperDao.populateAdmin(resultSet));
+                Admin admin = HelperDao.populateAdmin(resultSet);
+                if(admin.getPhoneNumber().equals(validation.getLogin()) && admin.getPassword().equals(validation.getPassword())){
+                    validation.setFoundedUser(admin);
+                    break;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            semaphore.release(100);
         }
     }
 

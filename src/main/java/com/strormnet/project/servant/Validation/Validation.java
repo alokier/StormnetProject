@@ -1,13 +1,14 @@
 package com.strormnet.project.servant.Validation;
 
+import com.strormnet.project.model.users.Admin;
+import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.model.users.User;
-import com.strormnet.project.servant.Validation.Threads.CheckAdminsPrepodavatelThread;
 import com.strormnet.project.servant.Validation.Threads.GetAdminsFromDataBaseThread;
 import com.strormnet.project.servant.Validation.Threads.GetPrepodavatelFromDataBaseThread;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Semaphore;
+
 
 public class Validation {
 
@@ -15,7 +16,6 @@ public class Validation {
     private Integer login;
     private String password;
     private User user;
-    private Semaphore semaphore = new Semaphore(100);
 
     public Validation(Integer login, String password) {
         this.login = login;
@@ -23,28 +23,31 @@ public class Validation {
 
     }
 
-    public synchronized <T extends User> void putUser(T user){
-        users.add(user);
-    }
-
-    public User startValidation() throws InterruptedException {
-        GetAdminsFromDataBaseThread getAdminsFromDataBaseThread = new GetAdminsFromDataBaseThread(this, semaphore);
-        GetPrepodavatelFromDataBaseThread getPrepodavatelFromDataBaseThread = new GetPrepodavatelFromDataBaseThread(this, semaphore);
-        CheckAdminsPrepodavatelThread checkAdminsPrepodavatelThread = new CheckAdminsPrepodavatelThread(this, semaphore);
+    public <T extends User> T startValidation() throws InterruptedException {
+        GetAdminsFromDataBaseThread getAdminsFromDataBaseThread = new GetAdminsFromDataBaseThread(this);
+        GetPrepodavatelFromDataBaseThread getPrepodavatelFromDataBaseThread = new GetPrepodavatelFromDataBaseThread(this);
         getAdminsFromDataBaseThread.start();
         getPrepodavatelFromDataBaseThread.start();
-        checkAdminsPrepodavatelThread.start();
-        checkAdminsPrepodavatelThread.join();
-        System.out.println(getFoundedUser());
-        return getFoundedUser();
+        getPrepodavatelFromDataBaseThread.join();
+        if(getFoundedUser().getClass().isInstance(Prepodavatel.class)){
+            System.out.println("Вернул препода");
+            Prepodavatel prepodavatel = getFoundedUser();
+            return (T) prepodavatel;
         }
-
-
-    public User getFoundedUser() {
-        return user;
+        if(getFoundedUser().getClass().isInstance(Admin.class)){
+            System.out.println("Вернул админа");
+            Admin admin = getFoundedUser();
+            return (T) getFoundedUser();
+        }
+        return getFoundedUser();
     }
 
-    public void setFoundedUser(User user) {
+
+    public <T extends User> T getFoundedUser() {
+        return (T) user;
+    }
+
+    public <T extends User> void setFoundedUser(T user) {
         this.user = user;
     }
 
