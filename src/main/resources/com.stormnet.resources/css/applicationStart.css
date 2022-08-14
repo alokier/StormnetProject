@@ -1,0 +1,27 @@
+
+#CreateAcc:{
+-fx-font-family:System;
+-fx-font-style: Regular;
+}
+
+#CreateAcc:hover{
+-fx-font-size:14;
+}
+
+#titleLabel{
+
+}
+
+.button{
+-fx-background-color: #0ca2e1;
+-fx-background-radius: 30 0 0 30;
+}
+
+.button:hover{
+-fx-background-color: #20c0ff;
+}
+
+.button:pressed{
+-fx-background-color:F39C63;
+}
+

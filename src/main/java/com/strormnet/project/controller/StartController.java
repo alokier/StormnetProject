@@ -30,6 +30,9 @@ import static javafx.stage.Modality.WINDOW_MODAL;
 public class StartController {
 
     @FXML
+    private Label titleLabel;
+
+    @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -54,16 +57,6 @@ public class StartController {
     private Label incorrectPassword;
 
     Stage stage;
-
-    @FXML
-    void LoginOnMousePressed(MouseEvent event) {
-        LoginButton.setStyle("-fx-background-color:F39C63");
-    }
-
-    @FXML
-    void LoginOnMouseReleased(MouseEvent event) {
-        LoginButton.setStyle("-fx-background-color: #0ca2e1");
-    }
 
     @FXML
     void onMouseClickedOnLoginField(MouseEvent event) {
@@ -112,6 +105,9 @@ public class StartController {
             });
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e){
+            Servant.ErrorFieldStyle(false, LoginField, PasswordField);
+            incorrectPassword.setVisible(true);
         }
     }
 

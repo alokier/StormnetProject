@@ -14,6 +14,7 @@ public class StormnetProject extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource("/com.stormnet.resources/Authorisation.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 540, 460);
+        scene.getStylesheets().add(getClass().getResource("/com.stormnet.resources/css/applicationStart.css").toExternalForm());
         stage.setTitle("Авторизация");
         stage.setScene(scene);
         stage.show();

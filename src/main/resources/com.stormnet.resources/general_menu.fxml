@@ -66,7 +66,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Button fx:id="exitButton" layoutX="14.0" layoutY="317.0" mnemonicParsing="false" onAction="#Exit" onMousePressed="#OnExitPressed" onMouseReleased="#OnExitReleased" prefHeight="34.0" prefWidth="77.0" style="-fx-background-color: #0ca2e1;" text="Выйти" AnchorPane.bottomAnchor="49.40000000000001" AnchorPane.leftAnchor="44.0">
+            <Button fx:id="exitButton" layoutX="14.0" layoutY="317.0" mnemonicParsing="false" onAction="#Exit" prefHeight="34.0" prefWidth="77.0" style="-fx-background-color: #0ca2e1;" text="Выйти" AnchorPane.bottomAnchor="49.40000000000001" AnchorPane.leftAnchor="44.0">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
@@ -75,7 +75,7 @@
                </cursor>
             </Button>
             <Accordion layoutX="338.0" layoutY="114.0" />
-            <Button fx:id="ButtonStartLesson" layoutX="365.0" layoutY="107.0" mnemonicParsing="false" onMousePressed="#onStartLessonPressed" onMouseReleased="#onStartLessonReleased" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Начать урок" AnchorPane.rightAnchor="147.79999999999995">
+            <Button fx:id="ButtonStartLesson" layoutX="512.0" layoutY="107.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="128.0" text="Начать урок" AnchorPane.rightAnchor="0.7999999999999545">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
@@ -83,7 +83,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="ButtonGetLessons" layoutX="365.0" layoutY="154.0" mnemonicParsing="false" onMousePressed="#onWatchLessonPressed" onMouseReleased="#onWatchLessonReleased" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Просмотреть урок" AnchorPane.rightAnchor="147.79999999999995">
+            <Button fx:id="ButtonGetLessons" layoutX="512.0" layoutY="154.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="128.0" text="Просмотреть урок" AnchorPane.rightAnchor="0.7999999999999545">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
@@ -91,7 +91,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="ButtonGetGroups" layoutX="365.0" layoutY="203.0" mnemonicParsing="false" onMousePressed="#onMyGroupsPressed" onMouseReleased="#onMyGroupsReleased" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Мои группы" AnchorPane.rightAnchor="147.79999999999995">
+            <Button fx:id="ButtonGetGroups" layoutX="512.0" layoutY="203.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="128.0" text="Мои группы" AnchorPane.rightAnchor="0.7999999999999545">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
@@ -107,7 +107,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Label>
-            <Label fx:id="fioLabel" layoutX="146.0" layoutY="14.0" text="ФИО" textFill="#0ca2e1" AnchorPane.topAnchor="14.0">
+            <Label fx:id="fioLabel" layoutX="146.0" layoutY="14.0" text="ФИО" textAlignment="CENTER" textFill="#0ca2e1" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Impact" size="28.0" />
                </font>
@@ -115,7 +115,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Label>
-            <Button fx:id="adminPrepButtonId" layoutX="44.0" layoutY="107.0" mnemonicParsing="false" onAction="#AdminsPrepsButton" onMousePressed="#onPrepPressed" onMouseReleased="#onPrepReleased" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Преподаватели" AnchorPane.leftAnchor="44.0">
+            <Button fx:id="adminPrepButtonId" layoutY="107.0" mnemonicParsing="false" onAction="#AdminsPrepsButton" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Преподаватели" AnchorPane.leftAnchor="0.0">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
@@ -123,7 +123,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="adminGroupsButtonId" layoutX="44.0" layoutY="154.0" mnemonicParsing="false" onAction="#AdminGroupsButton" onMousePressed="#onGroupsPressed" onMouseReleased="#OnGroupsReleased" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Группы" AnchorPane.leftAnchor="44.0">
+            <Button fx:id="adminGroupsButtonId" layoutY="154.0" mnemonicParsing="false" onAction="#AdminGroupsButton" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Группы" AnchorPane.leftAnchor="0.0">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
@@ -131,7 +131,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="adminStudensButtonId" layoutX="44.0" layoutY="203.0" mnemonicParsing="false" onAction="#AdminStudentsButton" onMousePressed="#onStudensPressed" onMouseReleased="#onStudentsReleased" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Студенты" AnchorPane.leftAnchor="44.0">
+            <Button fx:id="adminStudensButtonId" layoutY="203.0" mnemonicParsing="false" onAction="#AdminStudentsButton" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #0ca2e1;" text="Студенты" AnchorPane.leftAnchor="0.0">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
@@ -139,9 +139,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="adminLabelPanelID" layoutX="44.0" layoutY="48.0" text="Панель администратора" textFill="#0ca2e1" AnchorPane.topAnchor="48.0">
+            <Label fx:id="adminLabelPanelID" layoutX="44.0" layoutY="48.0" prefHeight="40.0" prefWidth="321.0" text="Панель администратора" textFill="#0ca2e1" AnchorPane.topAnchor="48.0">
                <font>
-                  <Font name="Impact" size="28.0" />
+                  <Font size="28.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />

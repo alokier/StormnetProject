@@ -1,14 +1,12 @@
 package com.strormnet.project.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.strormnet.project.model.users.Admin;
 import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Servant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -107,6 +105,7 @@ public class GeneralMenuController {
     /*...........*/
     @FXML
     void initialize() {
+        this.getStylesheets().add(getClass().getResource("/com.stormnet.resources/css/applicationStart.css").toExternalForm());
     }
 
     /*..............Админка..............*/
@@ -127,66 +126,5 @@ public class GeneralMenuController {
     }
 
     /*...........*/
-
-    @FXML
-    void OnGroupsReleased(MouseEvent event) {
-        adminGroupsButtonId.setStyle("-fx-background-color: #0ca2e1");
-
-    }
-
-    @FXML
-    void onGroupsPressed(MouseEvent event) {
-        adminGroupsButtonId.setStyle("-fx-background-color:F39C63");
-    }
-
-    @FXML
-    void onMyGroupsPressed(MouseEvent event) {
-        ButtonGetGroups.setStyle("-fx-background-color:F39C63");
-    }
-
-    @FXML
-    void onMyGroupsReleased(MouseEvent event) {
-        ButtonGetGroups.setStyle("-fx-background-color: #0ca2e1");
-    }
-
-    @FXML
-    void onPrepPressed(MouseEvent event) {
-        adminPrepButtonId.setStyle("-fx-background-color:F39C63");
-    }
-
-    @FXML
-    void onPrepReleased(MouseEvent event) {
-        adminPrepButtonId.setStyle("-fx-background-color: #0ca2e1");
-    }
-
-    @FXML
-    void onStartLessonPressed(MouseEvent event) {
-        ButtonStartLesson.setStyle("-fx-background-color:F39C63");
-    }
-
-    @FXML
-    void onStartLessonReleased(MouseEvent event) {
-        ButtonStartLesson.setStyle("-fx-background-color: #0ca2e1");
-    }
-
-    @FXML
-    void onStudensPressed(MouseEvent event) {
-        adminStudensButtonId.setStyle("-fx-background-color:F39C63");
-    }
-
-    @FXML
-    void onStudentsReleased(MouseEvent event) {
-        adminStudensButtonId.setStyle("-fx-background-color: #0ca2e1");
-    }
-
-    @FXML
-    void onWatchLessonPressed(MouseEvent event) {
-        ButtonGetLessons.setStyle("-fx-background-color:F39C63");
-    }
-
-    @FXML
-    void onWatchLessonReleased(MouseEvent event) {
-        ButtonGetLessons.setStyle("-fx-background-color: #0ca2e1");
-    }
 
 }
