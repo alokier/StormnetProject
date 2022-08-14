@@ -13,7 +13,7 @@ import java.io.IOException;
 public class StormnetProject extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource("/com.stormnet.resources/Authorisation.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource(Constant.AUTHORISATION_PATH));
         Scene scene = new Scene(fxmlLoader.load(), 540, 460);
         scene.getStylesheets().add(getClass().getResource(Constant.CSS_APP).toExternalForm());
         stage.setTitle("Авторизация");

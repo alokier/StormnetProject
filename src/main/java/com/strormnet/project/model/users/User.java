@@ -1,11 +1,13 @@
 package com.strormnet.project.model.users;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
 
     private Integer id;
     private String fio;
     private Integer phoneNumber;
-    private String password;
+    private transient String password;
     private Boolean isAdmin;
 
     public User() {

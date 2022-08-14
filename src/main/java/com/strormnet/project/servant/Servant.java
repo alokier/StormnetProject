@@ -1,6 +1,7 @@
 package com.strormnet.project.servant;
 
 import com.strormnet.project.StormnetProject;
+import com.strormnet.project.controller.AdminPrepodavatelController;
 import com.strormnet.project.controller.GeneralMenuController;
 import com.strormnet.project.dao.impl.PredmetRepositoryImpl;
 import com.strormnet.project.enums.PredmetType;
@@ -28,6 +29,10 @@ public class Servant {
         });
         }
 
+    public static<T extends User> void writeObject(T user){
+
+    }
+
     public static void onNextScene(String resource, String title, User user, Integer v, Integer v1) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource(resource));
         Scene scene = new Scene(fxmlLoader.load(), v, v1);
@@ -39,6 +44,17 @@ public class Servant {
         controller.addData(user);
         stage2.show();
         }
+
+    public static void onAdminPrepScene(String resource, String title, Integer v, Integer v1) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource(resource));
+        Scene scene = new Scene(fxmlLoader.load(), v, v1);
+        scene.getStylesheets().add(StormnetProject.class.getResource(Constant.CSS_MENU).toExternalForm());
+        Stage stage2 = new Stage();
+        stage2.setTitle(title);
+        stage2.setScene(scene);
+        stage2.show();
+    }
+
 
         public static <T extends Labeled> void closeScene(T button){
             Stage stage = (Stage) button.getScene().getWindow();

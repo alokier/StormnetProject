@@ -4,11 +4,14 @@ import java.util.ResourceBundle;
 
 import com.strormnet.project.model.users.Admin;
 import com.strormnet.project.model.users.Prepodavatel;
+import com.strormnet.project.model.users.User;
+import com.strormnet.project.servant.Servant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.input.MouseEvent;
 
 public class AdminPrepodavatelController {
 
@@ -31,13 +34,7 @@ public class AdminPrepodavatelController {
     private Label ProfileClickableLabel1;
 
     @FXML
-    private Label ProfileClickableLabel2;
-
-    @FXML
     private Button addPrepId;
-
-    @FXML
-    private Button exitButton;
 
     @FXML
     private TableColumn<?, ?> experience;
@@ -64,5 +61,20 @@ public class AdminPrepodavatelController {
     @FXML
     void onActionAddPrep(ActionEvent event) {
 
+    }
+
+    @FXML
+    void ClickOnBackButton(MouseEvent event) {
+        Servant.closeScene(addPrepId);
+    }
+
+    public <T extends User> void addData(T user) {
+        if (user instanceof Prepodavatel) {
+            prepodavatel = (Prepodavatel) user;
+            System.out.println(prepodavatel.getAdmin());
+        } else {
+            admin = (Admin) user;
+            System.out.println(admin.getAdmin());
+        }
     }
 }
