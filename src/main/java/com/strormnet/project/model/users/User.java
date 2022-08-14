@@ -11,17 +11,19 @@ public abstract class User {
     public User() {
     }
 
-    public User(Integer id, String fio, Integer phoneNumber, String password) {
+    public User(Integer id, String fio, Integer phoneNumber, String password, Boolean isAdmin) {
         this.id = id;
         this.fio = fio;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
-    public User(String fio, Integer phoneNumber, String password) {
+    public User(String fio, Integer phoneNumber, String password, Boolean isAdmin) {
         this.fio = fio;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public Integer getId() {

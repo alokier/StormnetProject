@@ -5,15 +5,18 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.strormnet.project.Application;
+import com.strormnet.project.StormnetProject;
 import com.strormnet.project.model.users.Admin;
 import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Servant;
+import com.strormnet.project.servant.constant.Constant;
 import com.strormnet.project.servant.validation.Validation;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +24,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import static javafx.stage.Modality.WINDOW_MODAL;
 
 public class StartController {
 
@@ -78,51 +83,40 @@ public class StartController {
 
     @FXML
     void onClickedValidation(MouseEvent event) {
-        try{
-            GeneralMenuController generalMenuController = new GeneralMenuController();
-            Validation validation = new Validation(Integer.parseInt(LoginField.getText()),PasswordField.getText());
+        try {
+            Validation validation = new Validation(Integer.parseInt(LoginField.getText()), PasswordField.getText());
             User user = validation.startValidation();
-
-            boolean isNotNull = Optional.ofNullable(user).isPresent();
-            if(isNotNull) {
-                System.out.println("Пользователь найден " + user);
-                incorrectPassword.setVisible(false);
-                if (user.getClass().equals(Prepodavatel.class)) {
+            Optional.ofNullable(user).ifPresentOrElse(val -> {
+                if (user instanceof Prepodavatel) {
                     Prepodavatel prepodavatel = (Prepodavatel) user;
-                    generalMenuController.addData(prepodavatel);
-//                    Servant.onNextScene("/com.stormnet.resources/GeneralMenu.fxml", "Menu", generalMenuController, 620, 410);
+                    try {
+                        Servant.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", prepodavatel, 620, 410);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    Servant.closeScene(forgotPassword);
                 }
-                if (user.getClass().equals(Admin.class)) {
+                if (user instanceof Admin) {
                     Admin admin = (Admin) user;
-                    generalMenuController.addData(admin);
-//                    Servant.onNextScene("/com.stormnet.resources/GeneralMenu.fxml", "Menu", generalMenuController, 620, 410);
-                } else {
-                    System.out.println("Пользователь не найден");
-                    Servant.ErrorFieldStyle(false, LoginField, PasswordField);
-                    incorrectPassword.setVisible(true);
+                    try {
+                        Servant.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", admin, 620, 410);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    Servant.closeScene(forgotPassword);
                 }
-            }
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com.stormnet.resources/GeneralMenu.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 620, 410);
-            Stage stage2 = new Stage();
-            generalMenuController = (GeneralMenuController) fxmlLoader.getController();
-            stage2.setTitle("TBD");
-            stage2.setScene(scene);
-            stage2.show();
-            stage = (Stage) LoginButton.getScene().getWindow();
-            stage.close();
-
-        } catch (NumberFormatException e) {
-            incorrectPassword.setVisible(true);
-            Servant.ErrorFieldStyle(false, LoginField,PasswordField);
+            }, () -> {
+                System.out.println("Пользователь не найден");
+                Servant.ErrorFieldStyle(false, LoginField, PasswordField);
+                incorrectPassword.setVisible(true);
+            });
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
+
+        @FXML
     void ForgotPasswordChangeCursor(MouseEvent event) {
     forgotPassword.setCursor(Cursor.HAND);
     }

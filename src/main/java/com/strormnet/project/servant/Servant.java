@@ -1,10 +1,12 @@
 package com.strormnet.project.servant;
 
-import com.strormnet.project.Application;
+import com.strormnet.project.StormnetProject;
 import com.strormnet.project.controller.GeneralMenuController;
+import com.strormnet.project.model.users.User;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,14 +23,21 @@ public class Servant {
         });
         }
 
-        public static void onNextScene(String getResource, String setTitle, GeneralMenuController controller, Integer v, Integer v1) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(getResource));
-            Scene scene = new Scene(fxmlLoader.load(), v, v1);
-            Stage stage2 = new Stage();
-            controller = (GeneralMenuController) fxmlLoader.getController();
-            stage2.setTitle(setTitle);
-            stage2.setScene(scene);
-            stage2.show();
+    public static void onNextScene(String resource, String title, User user, Integer v, Integer v1) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(StormnetProject.class.getResource(resource)); //создаем загрузчик
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle(title);
+//        stage.initModality(WINDOW_MODAL);
+//        stage.initOwner(((Node)event.getSource()).getScene().getWindow());
+        GeneralMenuController tableController = loader.getController(); //получаем контроллер
+        tableController.addData(user); //передаем данные
+        stage.show();
+        }
+
+        public static <T extends Labeled> void closeScene(T button){
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.close();
         }
     }
 

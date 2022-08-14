@@ -6,22 +6,24 @@ public class Prepodavatel extends User{
     private Integer experience;
 
 
-    public Prepodavatel(Integer id, String fio, Integer phoneNumber, String password, Double stavkaPerHour, Integer experience) {
-        super(id, fio, phoneNumber, password);
+    public Prepodavatel(Double stavkaPerHour, Integer experience) {
         this.stavkaPerHour = stavkaPerHour;
         this.experience = experience;
-        setAdmin(false);
     }
 
-    public Prepodavatel(String fio, Integer phoneNumber, String password, Double stavkaPerHour, Integer experience) {
-        super(fio, phoneNumber, password);
+    public Prepodavatel(Integer id, String fio, Integer phoneNumber, String password, Boolean isAdmin, Double stavkaPerHour, Integer experience) {
+        super(id, fio, phoneNumber, password, isAdmin);
         this.stavkaPerHour = stavkaPerHour;
         this.experience = experience;
-        setAdmin(false);
+    }
+
+    public Prepodavatel(String fio, Integer phoneNumber, String password, Boolean isAdmin, Double stavkaPerHour, Integer experience) {
+        super(fio, phoneNumber, password, isAdmin);
+        this.stavkaPerHour = stavkaPerHour;
+        this.experience = experience;
     }
 
     public Prepodavatel() {
-        setAdmin(false);
     }
 
     public Double getStavkaPerHour() {

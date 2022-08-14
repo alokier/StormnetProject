@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Application extends javafx.application.Application {
+public class StormnetProject extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com.stormnet.resources/Pass.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource("/com.stormnet.resources/Authorisation.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 540, 460);
         stage.setTitle("Авторизация");
         stage.setScene(scene);
@@ -23,7 +23,6 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) throws InterruptedException {
-
         launch();
     }
 }

@@ -42,7 +42,7 @@ import javafx.stage.Stage;
 
     @FXML
     void BackClicked(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.stormnet.resources/Pass.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.stormnet.resources/Authorisation.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 540, 460);
         Stage stage2 = new Stage();
         stage2.setTitle("Create Account");

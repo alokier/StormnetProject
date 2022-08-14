@@ -23,6 +23,7 @@ import java.sql.SQLException;
             admin.setFio(resultSet.getString("fio"));
             admin.setPhoneNumber(resultSet.getInt("phone_number"));
             admin.setPassword(resultSet.getString("password"));
+            admin.setAdmin(resultSet.getBoolean("isAdmin"));
             return admin;
         }
         public static Prepodavatel populatePrepodavatel(ResultSet resultSet) throws SQLException {
@@ -33,6 +34,7 @@ import java.sql.SQLException;
             prepodavatel.setExperience(resultSet.getInt("experience"));
             prepodavatel.setPhoneNumber(resultSet.getInt("phone_number"));
             prepodavatel.setPassword(resultSet.getString("password"));
+            prepodavatel.setAdmin(resultSet.getBoolean("isAdmin"));
             return prepodavatel;
         }
     }
