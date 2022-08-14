@@ -14,5 +14,4 @@ module com.strormnet.project {
     exports com.strormnet.project.dao;
     exports com.strormnet.project.dao.repository;
     exports com.strormnet.project.model.users;
-
 }

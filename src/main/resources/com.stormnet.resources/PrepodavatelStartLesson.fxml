@@ -104,7 +104,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label fx:id="ProfileBackButton" layoutX="14.0" layoutY="66.0" prefHeight="23.0" prefWidth="76.0" text="Назад" textFill="#0ca2e1">
+            <Label fx:id="ProfileBackButton" layoutX="14.0" layoutY="66.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@css/Menu.css" text="Назад" textFill="#0ca2e1">
                <font>
                   <Font name="Impact" size="18.0" />
                </font>

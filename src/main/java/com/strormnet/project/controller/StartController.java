@@ -83,7 +83,7 @@ public class StartController {
                 if (user instanceof Prepodavatel) {
                     Prepodavatel prepodavatel = (Prepodavatel) user;
                     try {
-                        Servant.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", prepodavatel, 620, 410);
+                        Servant.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", prepodavatel, 726, 410);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -92,7 +92,7 @@ public class StartController {
                 if (user instanceof Admin) {
                     Admin admin = (Admin) user;
                     try {
-                        Servant.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", admin, 620, 410);
+                        Servant.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", admin, 726, 410);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }

@@ -3,6 +3,7 @@ package com.strormnet.project;
 import com.strormnet.project.dao.impl.PredmetRepositoryImpl;
 import com.strormnet.project.enums.PredmetType;
 import com.strormnet.project.model.Predmet;
+import com.strormnet.project.servant.constant.Constant;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,7 +15,7 @@ public class StormnetProject extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource("/com.stormnet.resources/Authorisation.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 540, 460);
-        scene.getStylesheets().add(getClass().getResource("/com.stormnet.resources/css/applicationStart.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(Constant.CSS_APP).toExternalForm());
         stage.setTitle("Авторизация");
         stage.setScene(scene);
         stage.show();

@@ -1,27 +1,60 @@
-
-#CreateAcc:{
--fx-font-family:System;
--fx-font-style: Regular;
+#adminLabelPanelID{
+-fx-text-fill: #2a83a4;;
 }
 
-#CreateAcc:hover{
--fx-font-size:14;
+#exitButton{
+-fx-background-color: #2a83a4;
+-fx-background-radius: 0 30 30 0;
 }
 
-#titleLabel{
-
+#exitButton:hover{
+-fx-background-color: #1f5f76;
 }
 
-.button{
+#exitButton:pressed{{
+-fx-background-color: F39C63;
+}
+
+#ProfileBackButton:hover{
+-fx-font-size:19;
+-fx-font-family:Impact;
+}
+
+
+.leftButton{
+-fx-background-color: #0ca2e1;
+-fx-background-radius: 0 30 30 0;
+}
+.leftButton:hover{
+-fx-background-color: #20c0ff;
+}
+
+.leftButton:pressed{
+-fx-background-color:F39C63;
+}
+
+.rightButton{
 -fx-background-color: #0ca2e1;
 -fx-background-radius: 30 0 0 30;
 }
 
-.button:hover{
+.rightButton:hover{
 -fx-background-color: #20c0ff;
 }
 
-.button:pressed{
+.rightButton:pressed{
 -fx-background-color:F39C63;
+}
+
+.justButton{
+-fx-background-color: #0ca2e1;
+}
+.justButton:hover{
+-fx-background-color: #20c0ff;
+}
+.justButton:pressed{
+-fx-background-color:F39C63;
+}
+
 }
 

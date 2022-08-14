@@ -14,6 +14,6 @@ public abstract class Constant {
 
 
     /*CSS*/
-    public static final String CSS_APP =  "/com.stormnet.resources/css/applicationStart.css";
+    public static final String CSS_APP = "/com.stormnet.resources/css/Start.css";
     public static final String CSS_MENU =  "/com.stormnet.resources/css/Menu.css";
 }

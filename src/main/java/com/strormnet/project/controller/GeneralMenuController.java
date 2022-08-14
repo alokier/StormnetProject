@@ -93,19 +93,10 @@ public class GeneralMenuController {
         Servant.closeScene(fioLabel);
     }
 
-    @FXML
-    void OnExitPressed(MouseEvent event) {
-        exitButton.setStyle("-fx-background-color:F39C63");
-    }
-
-    @FXML
-    void OnExitReleased(MouseEvent event) {
-        exitButton.setStyle("-fx-background-color: #0ca2e1");
-    }
     /*...........*/
     @FXML
     void initialize() {
-        this.getStylesheets().add(getClass().getResource("/com.stormnet.resources/css/applicationStart.css").toExternalForm());
+
     }
 
     /*..............Админка..............*/
