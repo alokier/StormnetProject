@@ -5,18 +5,16 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.strormnet.project.StormnetProject;
 import com.strormnet.project.model.users.Admin;
 import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.constant.Constant;
+import com.strormnet.project.servant.nextScene.ToGeneralMenuControllerFromStart;
 import com.strormnet.project.servant.validation.Validation;
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,8 +22,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-import static javafx.stage.Modality.WINDOW_MODAL;
 
 public class StartController {
 
@@ -83,7 +79,7 @@ public class StartController {
                 if (user instanceof Prepodavatel) {
                     Prepodavatel prepodavatel = (Prepodavatel) user;
                     try {
-                        Servant.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", prepodavatel, 726, 410);
+                        ToGeneralMenuControllerFromStart.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", prepodavatel, 726, 410);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -92,7 +88,7 @@ public class StartController {
                 if (user instanceof Admin) {
                     Admin admin = (Admin) user;
                     try {
-                        Servant.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", admin, 726, 410);
+                        ToGeneralMenuControllerFromStart.onNextScene(Constant.GENERAL_MENU_PATH, "Menu", admin, 726, 410);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }

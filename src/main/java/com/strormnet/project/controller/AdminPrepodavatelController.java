@@ -1,11 +1,10 @@
 package com.strormnet.project.controller;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.strormnet.project.model.users.Admin;
-import com.strormnet.project.model.users.Prepodavatel;
-import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.Servant;
+import com.strormnet.project.servant.constant.Constant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -54,13 +53,13 @@ public class AdminPrepodavatelController {
     @FXML
     private TableColumn<?, ?> stavkaPerHour;
 
-    private Prepodavatel prepodavatel;
-
-    private Admin admin;
-
     @FXML
     void onActionAddPrep(ActionEvent event) {
-
+        try {
+            Servant.onTheNextSceneWithoutObj(Constant.ADMIN_PREP_ADD_PATH,"Add",260, 420, true, addPrepId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -68,13 +67,5 @@ public class AdminPrepodavatelController {
         Servant.closeScene(addPrepId);
     }
 
-    public <T extends User> void addData(T user) {
-        if (user instanceof Prepodavatel) {
-            prepodavatel = (Prepodavatel) user;
-            System.out.println(prepodavatel.getAdmin());
-        } else {
-            admin = (Admin) user;
-            System.out.println(admin.getAdmin());
-        }
-    }
+
 }

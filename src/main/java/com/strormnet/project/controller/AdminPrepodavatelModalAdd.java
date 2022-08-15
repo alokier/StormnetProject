@@ -1,4 +1,7 @@
 package com.strormnet.project.controller;
+import com.strormnet.project.servant.Servant;
+import com.strormnet.project.servant.constant.Constant;
+import com.strormnet.project.servant.nextScene.ToModalConfirmWindowFromPrepAddController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,6 +9,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 
 public class AdminPrepodavatelModalAdd {
 
@@ -25,7 +31,7 @@ public class AdminPrepodavatelModalAdd {
     private TextField idFioField;
 
     @FXML
-    private ImageView idGeneratePassword;
+    private Button idGeneratePassword;
 
     @FXML
     private CheckBox idIsAdminButton;
@@ -47,6 +53,21 @@ public class AdminPrepodavatelModalAdd {
 
     @FXML
     void onActionAddPrep(ActionEvent event) {
+        //TODO сделать добавить пользователя в базу данных
+    }
 
+    @FXML
+    void generatePasswordOnclick(ActionEvent event) {
+        idPasswordButton.setText(Servant.generatePassword(10));
+    }
+
+    @FXML
+    void onClickedProfileBackButton(MouseEvent event) {
+        try {
+            ToModalConfirmWindowFromPrepAddController.onTheNextSceneWithStage(Constant.MODAL_CONFIRM_WINDOW_PATH,"Confirmation window",Servant.getCurrentStage(titleLabel),275,210,true,titleLabel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        Servant.closeScene(ProfileBackButton);
     }
 }

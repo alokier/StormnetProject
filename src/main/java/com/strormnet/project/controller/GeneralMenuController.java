@@ -7,10 +7,8 @@ import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.constant.Constant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -119,7 +117,7 @@ public class GeneralMenuController {
     @FXML
     void AdminsPrepsButton(ActionEvent event) {
         try {
-            Servant.onAdminPrepScene(Constant.ADMIN_PREP_PATH,"Teachers",726,410);
+            Servant.onTheNextSceneWithoutObj(Constant.ADMIN_PREP_PATH,"Teachers",726,410,true, fioLabel);
         } catch (IOException e) {
             e.printStackTrace();
         }

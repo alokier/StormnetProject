@@ -62,7 +62,7 @@
                </children>
             </AnchorPane>
             <Accordion layoutX="338.0" layoutY="114.0" />
-            <Button fx:id="addPrepId" layoutX="109.0" layoutY="358.0" mnemonicParsing="false" onAction="#onActionAddPrep" prefHeight="26.0" prefWidth="102.0" styleClass="justButton" stylesheets="@css/Menu.css" text="Добавить" AnchorPane.bottomAnchor="15.600000000000001">
+            <Button fx:id="addPrepId" layoutX="132.0" layoutY="357.0" mnemonicParsing="false" onAction="#onActionAddPrep" prefHeight="26.0" prefWidth="102.0" styleClass="rightButton" stylesheets="@css/Menu.css" text="Добавить" AnchorPane.rightAnchor="406.4">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
@@ -86,7 +86,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Label>
-            <Label fx:id="ProfileBackButton" layoutX="14.0" layoutY="359.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@css/Menu.css" text="Назад" textFill="#0ca2e1" AnchorPane.leftAnchor="14.0">
+            <Label fx:id="ProfileBackButton" layoutX="14.0" layoutY="359.0" onMouseClicked="#onClickedProfileBackButton" prefHeight="23.0" prefWidth="76.0" stylesheets="@css/Menu.css" text="Назад" textFill="#0ca2e1" AnchorPane.leftAnchor="14.0">
                <font>
                   <Font name="Impact" size="18.0" />
                </font>
@@ -108,11 +108,15 @@
             <TextField fx:id="idPhoneNumber" layoutX="23.0" layoutY="221.0" promptText="Номер телефона" AnchorPane.leftAnchor="22.0" />
             <TextField fx:id="idPasswordButton" layoutX="22.0" layoutY="266.0" promptText="Пароль" AnchorPane.leftAnchor="22.0" />
             <CheckBox fx:id="idIsAdminButton" layoutX="22.0" layoutY="306.0" mnemonicParsing="false" text="Админ" textFill="#0ca2e1" AnchorPane.leftAnchor="22.0" />
-            <ImageView fx:id="idGeneratePassword" fitHeight="78.0" fitWidth="35.0" layoutX="181.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/kisspng-computer-icons-desktop-wallpaper-clip-art-5ae2d620ef9408.9184260815248153929813.png" />
-               </image>
-            </ImageView>
+            <Button fx:id="idGeneratePassword" layoutX="172.0" layoutY="256.0" mnemonicParsing="false" onAction="#generatePasswordOnclick" styleClass="idGeneratePassword" stylesheets="@css/Menu.css" text="Button">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="testButton">
+                     <image>
+                        <Image url="@images/kisspng-computer-icons-desktop-wallpaper-clip-art-5ae2d620ef9408.9184260815248153929813.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
     </AnchorPane>
   </children>

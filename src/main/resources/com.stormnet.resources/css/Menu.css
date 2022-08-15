@@ -7,6 +7,33 @@
 -fx-background-radius: 0 30 30 0;
 }
 
+.exitButton{
+-fx-background-color: #2a83a4;
+-fx-background-radius: 30 0 0 30;
+}
+
+.exitButton:hover{
+-fx-background-color: #1f5f76;
+}
+
+.exitButton:pressed{
+-fx-background-color: F39C63;
+}
+
+.idGeneratePassword{
+-fx-background-color:transparent;
+-fx-border-color:transparent;
+-fx-text-fill:transparent;
+}
+.idGeneratePassword:pressed{
+-fx-effect:innershadow(two-pass-box , #00acff , 0 , 255.0 , 255.0 , 127.0);
+-fx-background-color:transparent;
+-fx-border-color:transparent;
+-fx-text-fill:transparent;
+}
+
+
+
 #exitButton:hover{
 -fx-background-color: #1f5f76;
 }
