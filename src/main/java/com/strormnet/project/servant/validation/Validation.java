@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,20 +69,17 @@ public class Validation {
         return (T) getFoundedUser();
     }
 
-    public <T extends  User> void checkNull(T user, Label label, TextField loginField, PasswordField passwordField){
-        Optional.ofNullable(user).ifPresentOrElse(gen -> {
-            System.out.println("Пользователь найден " + user);
-            label.setVisible(false);
-            if(user.getClass().equals(Prepodavatel.class)){
-                Prepodavatel prepodavatel = (Prepodavatel) user;
-
-                //TODO реализовать передачу в ПреподМеню контроллер
-            }
-        }, () -> {
-            System.out.println("Пользователь не найден");
-            Servant.ErrorFieldStyle(false, loginField, passwordField);
-            label.setVisible(true);
-        });
+    public static <T extends TextField> void checkNullFields(Boolean clearFields, T...fields){
+            Servant.ClearErrorFieldStyle(fields);
+            //TODO Сделать валидацию всех полей
+//            Arrays.stream(fields).forEach(field -> {
+//                if(field.getText().equals(null) || field.getText() == "") {
+//                    field.setStyle("-fx-border-color:red");
+//                }
+//                if(clearFields){
+//                    field.setText("");
+//                }
+//            });
+        }
     }
 
-}

@@ -2,6 +2,7 @@ package com.strormnet.project.controller;
 import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.constant.Constant;
 import com.strormnet.project.servant.nextScene.ToModalConfirmWindowFromPrepAddController;
+import com.strormnet.project.servant.validation.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,9 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 public class AdminPrepodavatelModalAdd {
+
+    @FXML
+    private Label checkAllFieldsLabel;
 
     @FXML
     private Label ProfileBackButton;
@@ -53,6 +57,8 @@ public class AdminPrepodavatelModalAdd {
 
     @FXML
     void onActionAddPrep(ActionEvent event) {
+        Validation.checkNullFields(false, idFioField,idStavkaPerHourId,idExpButton,idPhoneNumber,idPasswordButton);
+        checkAllFieldsLabel.setVisible(true);
         //TODO сделать добавить пользователя в базу данных
     }
 

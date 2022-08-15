@@ -48,7 +48,13 @@ public class Servant{
                 field.setText("");
             }
         });
-        }
+    }
+    public static <T extends TextField> void ClearErrorFieldStyle(T...fields){
+        Arrays.stream(fields).forEach(field -> {
+            field.setStyle("-fx-border-color:red");
+        });
+    }
+
 
     public static<T extends Labeled> void onTheNextSceneWithoutObj(String resource, String title, Integer v, Integer v1, Boolean onModal, T field) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource(resource));

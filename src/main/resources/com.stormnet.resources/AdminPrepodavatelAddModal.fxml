@@ -117,6 +117,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Label fx:id="checkAllFieldsLabel" layoutX="22.0" layoutY="324.0" prefHeight="26.0" prefWidth="194.0" text="Заполните все поля!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="22.0" />
          </children>
     </AnchorPane>
   </children>
