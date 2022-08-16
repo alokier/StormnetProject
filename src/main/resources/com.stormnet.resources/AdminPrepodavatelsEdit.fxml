@@ -101,7 +101,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Label>
-            <TableView layoutX="2.0" layoutY="99.0" prefHeight="226.0" prefWidth="482.0" style="-fx-background-color: #242424;">
+            <TableView fx:id="tableView" layoutX="2.0" layoutY="99.0" prefHeight="226.0" prefWidth="482.0" style="-fx-background-color: #242424;">
               <columns>
                 <TableColumn id="nameAndLastName" fx:id="fio" prefWidth="138.4000244140625" text="ФИО" />
                   <TableColumn id="nameCell" fx:id="stavkaPerHour" prefWidth="88.0" text="Ставка" />

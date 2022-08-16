@@ -10,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -55,9 +56,16 @@ public class AdminPrepodavatelModalAdd {
     @FXML
     private Label titleLabel;
 
+
+    @FXML
+    void checkField(KeyEvent event) {
+        //TODO реализовать метод лучше
+    Validation.removeText(idPhoneNumber, 9);
+    }
+
     @FXML
     void onActionAddPrep(ActionEvent event) {
-        Validation.checkNullFields(false, idFioField,idStavkaPerHourId,idExpButton,idPhoneNumber,idPasswordButton);
+//        Validation.checkNullFields(false, idFioField,idStavkaPerHourId,idExpButton,idPhoneNumber,idPasswordButton);
         checkAllFieldsLabel.setVisible(true);
         //TODO сделать добавить пользователя в базу данных
     }
@@ -69,6 +77,7 @@ public class AdminPrepodavatelModalAdd {
 
     @FXML
     void onClickedProfileBackButton(MouseEvent event) {
+        //TODO добавить что переход идёт, только если хоть в одном поле есть значение
         try {
             ToModalConfirmWindowFromPrepAddController.onTheNextSceneWithStage(Constant.MODAL_CONFIRM_WINDOW_PATH,"Confirmation window",Servant.getCurrentStage(titleLabel),275,210,true,titleLabel);
         } catch (IOException e) {

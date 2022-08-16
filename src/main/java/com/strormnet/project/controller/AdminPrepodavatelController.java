@@ -1,16 +1,27 @@
 package com.strormnet.project.controller;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
+import com.strormnet.project.dao.impl.PrepodavatelRepositoryImpl;
+import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.constant.Constant;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 public class AdminPrepodavatelController {
 
@@ -36,22 +47,44 @@ public class AdminPrepodavatelController {
     private Button addPrepId;
 
     @FXML
-    private TableColumn<?, ?> experience;
+    private TableColumn<Prepodavatel, Integer> experience;
 
     @FXML
-    private TableColumn<?, ?> fio;
+    private TableColumn<Prepodavatel, String> fio;
 
     @FXML
-    private TableColumn<?, ?> isAdmin;
+    private TableColumn<Prepodavatel, CheckBox> isAdmin;
 
     @FXML
-    private TableColumn<?, ?> password;
+    private TableColumn<Prepodavatel, String> password;
 
     @FXML
-    private TableColumn<?, ?> phoneNumber;
+    private TableColumn<Prepodavatel, Integer> phoneNumber;
 
     @FXML
-    private TableColumn<?, ?> stavkaPerHour;
+    private TableColumn<Prepodavatel, Integer> stavkaPerHour;
+
+    @FXML
+    private TableView<Prepodavatel> tableView;
+
+    @FXML
+    void initialize() {
+        PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
+        //TODO Разобраться почему не отображает isAdmin.
+        //TODO добавить демона который обновляет таблицу
+        List<Prepodavatel> all = prepodavatelRepository.getAll();
+        for(Prepodavatel prepodavatel : all) {
+            tableView.getItems().add(prepodavatel);
+            fio.setCellValueFactory(new PropertyValueFactory<Prepodavatel, String>("fio"));
+            stavkaPerHour.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("stavkaPerHour"));
+            experience.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("experience"));
+            phoneNumber.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("phoneNumber"));
+            password.setCellValueFactory(new PropertyValueFactory<Prepodavatel, String>("password"));
+            isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, CheckBox>("isAdmin"));
+        }
+
+
+    }
 
     @FXML
     void onActionAddPrep(ActionEvent event) {
@@ -66,6 +99,9 @@ public class AdminPrepodavatelController {
     void ClickOnBackButton(MouseEvent event) {
         Servant.closeScene(addPrepId);
     }
+
+
+
 
 
 }
