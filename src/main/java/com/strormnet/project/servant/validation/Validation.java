@@ -3,6 +3,7 @@ package com.strormnet.project.servant.validation;
 
 import com.strormnet.project.model.users.User;
 
+import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.validation.Threads.GetAdminsFromDataBaseThread;
 import com.strormnet.project.servant.validation.Threads.GetPrepodavatelFromDataBaseThread;
 
@@ -78,19 +79,20 @@ public class Validation {
             }
             return null;
         };
-
-//    public static <T extends TextField> void checkNullFields(Boolean clearFields, T...fields){
-//            Servant.ClearErrorFieldStyle(fields);
-        //TODO Сделать валидацию всех полей
-
-//            Arrays.stream(fields).forEach(field -> {
-//                if(field.getText().equals(null) || field.getText() == "") {
-//                    field.setStyle("-fx-border-color:red");
-//                }
-//                if(clearFields){
-//                    field.setText("");
-//                }
-//            });
     }
-}
+        public static <T extends TextField > void checkNullFields (Boolean clearFields, T...fields){
+            Servant.ClearErrorFieldStyle(fields);
+//        TODO Сделать валидацию всех полей
+
+            Arrays.stream(fields).forEach(field -> {
+                if (field.getText().equals(null) || field.getText().equals("")) {
+                    field.setStyle("-fx-border-color:red");
+                }
+                if (clearFields) {
+                    field.setText("");
+                }
+            });
+        }
+    }
+
 

@@ -51,7 +51,7 @@ public class Servant{
     }
     public static <T extends TextField> void ClearErrorFieldStyle(T...fields){
         Arrays.stream(fields).forEach(field -> {
-            field.setStyle("-fx-border-color:red");
+            field.setStyle(null);
         });
     }
 

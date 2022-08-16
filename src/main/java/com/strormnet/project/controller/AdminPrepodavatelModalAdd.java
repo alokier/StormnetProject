@@ -65,7 +65,7 @@ public class AdminPrepodavatelModalAdd {
 
     @FXML
     void onActionAddPrep(ActionEvent event) {
-//        Validation.checkNullFields(false, idFioField,idStavkaPerHourId,idExpButton,idPhoneNumber,idPasswordButton);
+        Validation.checkNullFields(false, idFioField,idStavkaPerHourId,idExpButton,idPhoneNumber,idPasswordButton);
         checkAllFieldsLabel.setVisible(true);
         //TODO сделать добавить пользователя в базу данных
     }
