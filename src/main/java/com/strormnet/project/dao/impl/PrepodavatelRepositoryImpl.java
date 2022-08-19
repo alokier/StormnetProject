@@ -92,4 +92,17 @@ public class PrepodavatelRepositoryImpl implements PrepodavatelRepository {
             e.printStackTrace();
         }
     }
+    public Integer getPrepodavatelsCount() {
+        Connection connection = new ConnectDao().getConnection();
+        String sqlCommand = "SELECT count(*) FROM prepodavatel;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet != null && resultSet.next()) {
+                return Integer.parseInt(resultSet.getString("count(*)"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

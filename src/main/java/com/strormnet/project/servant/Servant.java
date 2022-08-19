@@ -1,29 +1,17 @@
 package com.strormnet.project.servant;
-
 import com.strormnet.project.StormnetProject;
-import com.strormnet.project.controller.GeneralMenuController;
-import com.strormnet.project.controller.ModalConfirmationWindowController;
-import com.strormnet.project.model.users.User;
 import com.strormnet.project.servant.constant.Constant;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.w3c.dom.Element;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static java.util.Arrays.asList;
-import static javafx.stage.Modality.APPLICATION_MODAL;
-import static javafx.stage.Modality.WINDOW_MODAL;
 
 public class Servant{
 
@@ -79,6 +67,14 @@ public class Servant{
     public static <T extends Labeled> void closeScene(T button){
         Stage stage = (Stage) button.getScene().getWindow();
         stage.close();
+    }
+
+    public static void createAlert(String header, String contentText, Alert.AlertType type){
+
+        Alert alert = new Alert(type);
+        alert.setHeaderText(header);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 
    /* public static void onNextScene(String resource, String title, User user, Integer v, Integer v1) throws IOException {

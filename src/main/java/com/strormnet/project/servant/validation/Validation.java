@@ -7,13 +7,14 @@ import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.validation.Threads.GetAdminsFromDataBaseThread;
 import com.strormnet.project.servant.validation.Threads.GetPrepodavatelFromDataBaseThread;
 
+import com.strormnet.project.servant.validation.validationable.Validationable;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.UnaryOperator;
+
 
 
 public class Validation {
@@ -70,20 +71,50 @@ public class Validation {
         return (T) getFoundedUser();
     }
 
-    public static <T extends TextField> void removeText(T tf, Integer maxLength) {
-        //TODO Уточнить как это лучше сделать
-        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
-            String newText = change.getControlNewText();
-            if (newText.matches("-?([1-9][0-9]*)?")) {
-                return change;
+    public static <T extends TextField> void validateText(T tf, Integer maxLength, Boolean decimals) {
+        if(!decimals){
+            if (tf.getText().length() > maxLength) {
+                String s = tf.getText().substring(0, maxLength);
+                tf.setText(s);
+                tf.end();
             }
-            return null;
-        };
+            if (!tf.getText().matches("\\d*")) {
+                tf.setText(tf.getText().replaceAll("[^\\d]", ""));
+            }
+        }
+        else {
+            if (tf.getText().length() > maxLength) {
+                String s = tf.getText().substring(0, maxLength);
+                tf.setText(s);
+                tf.end();
+            }
+            if (!tf.getText().matches("(\\d*)([.,])(\\d{2})")) {
+                tf.setText(tf.getText().replaceAll("[^.,\\d]", ""));
+                tf.end();
+            }
+            if (tf.getText().length() == maxLength && !tf.getText().matches("(\\d*)([.,])(\\d{2})")){
+                tf.setText("");
+                tf.end();
+            }
+        }
     }
-        public static <T extends TextField > void checkNullFields (Boolean clearFields, T...fields){
-            Servant.ClearErrorFieldStyle(fields);
-//        TODO Сделать валидацию всех полей
 
+    private static <T extends TextField> Validationable chooseOfBehavior(Boolean mustBeNull, T... fields) {
+        if (mustBeNull) {
+            return (a) -> Arrays.stream(fields).anyMatch(field -> field.getText().equals(null) || field.getText().equals(""));
+        } else {
+            return (a) -> Arrays.stream(fields).anyMatch(field -> !field.getText().equals(""));
+            }
+        }
+
+
+
+    public static <T extends TextField> Boolean checkNullFields(Boolean clearFields, Boolean notBeNull, T... fields) {
+        Servant.ClearErrorFieldStyle(fields);
+        Boolean test = null;
+        Boolean aBoolean = chooseOfBehavior(notBeNull, fields).checkFields(test);
+        System.out.println(aBoolean);
+        if (aBoolean && notBeNull){
             Arrays.stream(fields).forEach(field -> {
                 if (field.getText().equals(null) || field.getText().equals("")) {
                     field.setStyle("-fx-border-color:red");
@@ -92,7 +123,12 @@ public class Validation {
                     field.setText("");
                 }
             });
+            return aBoolean;
+        } else {
+            return aBoolean;
         }
     }
+}
+
 
 

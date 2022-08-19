@@ -7,6 +7,7 @@ import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.constant.Constant;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;

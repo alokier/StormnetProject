@@ -103,9 +103,9 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Label>
-            <TextField fx:id="idStavkaPerHourId" layoutX="23.0" layoutY="130.0" promptText="Ставка в час" AnchorPane.leftAnchor="22.0" />
-            <TextField fx:id="idExpButton" layoutX="23.0" layoutY="176.0" promptText="Опыт" AnchorPane.leftAnchor="22.0" />
-            <TextField fx:id="idPhoneNumber" layoutX="23.0" layoutY="221.0" onKeyTyped="#checkField" promptText="Номер телефона" AnchorPane.leftAnchor="22.0" />
+            <TextField fx:id="idStavkaPerHourId" layoutX="23.0" layoutY="130.0" onKeyTyped="#onlyNumberInStavka" promptText="Ставка в час" AnchorPane.leftAnchor="22.0" />
+            <TextField fx:id="idExpButton" layoutX="23.0" layoutY="176.0" onKeyTyped="#onlyNumberInExp" promptText="Опыт" AnchorPane.leftAnchor="22.0" />
+            <TextField fx:id="idPhoneNumber" layoutX="23.0" layoutY="221.0" onKeyTyped="#onlyNumber" promptText="Номер телефона" AnchorPane.leftAnchor="22.0" />
             <TextField fx:id="idPasswordButton" layoutX="22.0" layoutY="266.0" promptText="Пароль" AnchorPane.leftAnchor="22.0" />
             <CheckBox fx:id="idIsAdminButton" layoutX="22.0" layoutY="306.0" mnemonicParsing="false" text="Админ" textFill="#0ca2e1" AnchorPane.leftAnchor="22.0" />
             <Button fx:id="idGeneratePassword" layoutX="172.0" layoutY="256.0" mnemonicParsing="false" onAction="#generatePasswordOnclick" styleClass="idGeneratePassword" stylesheets="@css/Menu.css" text="Button">

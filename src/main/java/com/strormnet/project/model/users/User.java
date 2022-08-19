@@ -8,7 +8,7 @@ public abstract class User implements Serializable {
     private String fio;
     private Integer phoneNumber;
     private transient String password;
-    private Boolean isAdmin;
+    private Boolean admin;
 
     public User() {
     }
@@ -18,14 +18,14 @@ public abstract class User implements Serializable {
         this.fio = fio;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
     }
 
     public User(String fio, Integer phoneNumber, String password, Boolean isAdmin) {
         this.fio = fio;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
     }
 
     public Integer getId() {
@@ -61,11 +61,11 @@ public abstract class User implements Serializable {
     }
 
     public Boolean getAdmin() {
-        return isAdmin;
+        return admin;
     }
 
     public void setAdmin(Boolean admin) {
-        isAdmin = admin;
+        this.admin = admin;
     }
 
     @Override
