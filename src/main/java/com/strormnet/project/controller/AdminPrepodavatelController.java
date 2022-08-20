@@ -119,7 +119,7 @@ public class AdminPrepodavatelController {
                     ).setFio(t.getNewValue());
                     applyUpdateId.setVisible(true);
                     cancelSaveID.setVisible(true);
-                    fio.setCellFactory(Set("-fx-background-color:yellow;"));
+
                 });
     }
 
