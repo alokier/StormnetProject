@@ -23,6 +23,11 @@ public class StormnetProject extends javafx.application.Application {
         stage.setTitle("Авторизация");
         stage.setScene(scene);
         stage.show();
+        try {
+            Servant.writeOtherInfo(Constant.OTHER_INFO_PATH, "resetToPassword = password");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) throws InterruptedException {

@@ -59,10 +59,6 @@
                </cursor>
             </Button>
             <TextField fx:id="LoginField" layoutX="96.0" layoutY="157.0" onMouseClicked="#onMouseClickedOnLoginField" promptText="Login" AnchorPane.leftAnchor="96.0" />
-            <Label fx:id="CreateAcc" layoutX="96.0" layoutY="122.0" onMousePressed="#CreateAccountClicked" text="Create account" textFill="WHITE" AnchorPane.topAnchor="122.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
             <Label fx:id="forgotPassword" layoutX="104.0" layoutY="226.0" onMouseClicked="#ForgotPasswordClicked" onMouseEntered="#ForgotPasswordChangeCursor" text="Forgot password?" textFill="WHITE" visible="false">
                <font>
                   <Font name="Ink Free" size="12.0" />

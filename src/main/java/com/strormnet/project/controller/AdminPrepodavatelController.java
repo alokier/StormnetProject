@@ -3,7 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
-import com.strormnet.project.servant.stringConvertors.CustomIntegerStringConverter;
+//import com.strormnet.project.servant.stringConvertors.AdminCustomStringConverter;
+import com.strormnet.project.servant.stringConvertors.ExperienceCustomIntegerStringConverter;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,14 +16,19 @@ import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.constant.Constant;
 
+import com.strormnet.project.servant.stringConvertors.PhoneNumberCustomIntegerStringConverter;
+import com.strormnet.project.servant.stringConvertors.StavkaPerHourCustomDoubleStringConverter;
 import com.strormnet.project.servant.updateThreads.UpdateDemonThread;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 
 public class AdminPrepodavatelController {
@@ -67,7 +73,7 @@ public class AdminPrepodavatelController {
     private TableColumn<Prepodavatel, String> fio;
 
     @FXML
-    private TableColumn<Prepodavatel, CheckBox> isAdmin;
+    private TableColumn<Prepodavatel, Boolean> isAdmin;
 
     @FXML
     private TableColumn<Prepodavatel, String> password;
@@ -100,11 +106,14 @@ public class AdminPrepodavatelController {
         experience.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("experience"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("phoneNumber"));
         password.setCellValueFactory(new PropertyValueFactory<Prepodavatel, String>("password"));
-        isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, CheckBox>("admin"));
+        isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Boolean>("admin"));
         updateDemonThread.setTableView(tableView);
         updateDemonThread.start();
         setupFioColumn();
+        setupStavkaPerHour();
         setupExperienceColumn();
+        setupPhoneNumberColumn();
+//        setupAdminColumn();
         //TODO Сделать редактирование других колонок
 
 
@@ -119,25 +128,49 @@ public class AdminPrepodavatelController {
                     ).setFio(t.getNewValue());
                     applyUpdateId.setVisible(true);
                     cancelSaveID.setVisible(true);
-
                 });
     }
-
+    private void setupStavkaPerHour(){
+        stavkaPerHour.setCellFactory(TextFieldTableCell.<Prepodavatel, Double>forTableColumn(new StavkaPerHourCustomDoubleStringConverter(tableView)));
+        stavkaPerHour.setOnEditCommit(event -> {
+            ((Prepodavatel) event.getTableView().getItems().get(
+                    event.getTablePosition().getRow())
+            ).setStavkaPerHour(event.getNewValue());
+            applyUpdateId.setVisible(true);
+            cancelSaveID.setVisible(true);
+        });
+    }
     private void setupExperienceColumn() {
-        experience.setCellFactory(TextFieldTableCell.<Prepodavatel, Integer>forTableColumn(new CustomIntegerStringConverter(tableView, applyUpdateId, cancelSaveID)));
+        experience.setCellFactory(TextFieldTableCell.<Prepodavatel, Integer>forTableColumn(new ExperienceCustomIntegerStringConverter(tableView)));
         experience.setOnEditCommit(event -> {
-            try {
+            ((Prepodavatel) event.getTableView().getItems().get(
+                    event.getTablePosition().getRow())
+            ).setExperience(event.getNewValue());
+            applyUpdateId.setVisible(true);
+            cancelSaveID.setVisible(true);
+        });
+    }
+
+    private void setupPhoneNumberColumn(){
+        phoneNumber.setCellFactory(TextFieldTableCell.<Prepodavatel, Integer>forTableColumn(new PhoneNumberCustomIntegerStringConverter(tableView)));
+        phoneNumber.setOnEditCommit(event -> {
                 ((Prepodavatel) event.getTableView().getItems().get(
                         event.getTablePosition().getRow())
                 ).setExperience(event.getNewValue());
                 applyUpdateId.setVisible(true);
                 cancelSaveID.setVisible(true);
-
-            } catch (NumberFormatException e) {
-                Servant.createAlert("Ошибка", "Проверьте введённые данные в поле опыт", Alert.AlertType.ERROR);
-            }
         });
     }
+//    private void setupAdminColumn(){
+//        isAdmin.setCellFactory(CheckBoxTableCell.<Prepodavatel, Boolean>forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
+//            @Override
+//            public ObservableValue<Boolean> call(Integer integer) {
+//
+//                return null;
+//            }
+//        }));
+//
+//    }
 
     @FXML
     void onActionAddPrep(ActionEvent event) {
@@ -201,7 +234,7 @@ public class AdminPrepodavatelController {
     }
 
     @FXML
-    void onActionResetPassword(ActionEvent event) {
+    void onActionResetPassword(ActionEvent event) throws FileNotFoundException {
         try {
             PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -220,7 +253,7 @@ public class AdminPrepodavatelController {
             } else {
                 alert.close();
             }
-        } catch (RuntimeException e) {
+        }catch (RuntimeException e) {
             Servant.createAlert("Пользователь не выбран", "Пользователь не выбран!", Alert.AlertType.INFORMATION);
         } catch (FileNotFoundException e) {
             PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();

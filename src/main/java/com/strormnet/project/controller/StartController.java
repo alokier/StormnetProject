@@ -35,9 +35,6 @@ public class StartController {
     private URL location;
 
     @FXML
-    private Label CreateAcc;
-
-    @FXML
     private Label forgotPassword;
 
     @FXML
@@ -118,18 +115,5 @@ public class StartController {
         LoginField.setFocusTraversable(false);
         PasswordField.setFocusTraversable(false);
     }
-
-    @FXML
-    protected void CreateAccountClicked(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.stormnet.resources/CreateAccount.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 350, 400);
-        Stage stage2 = new Stage();
-        stage2.setTitle("Create Account");
-        stage2.setScene(scene);
-        stage2.show();
-        stage = (Stage) LoginButton.getScene().getWindow();
-        stage.hide();
-    }
-
 }
 
