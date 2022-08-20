@@ -142,9 +142,9 @@
                   <String fx:value="rightButton" />
                </styleClass>
             </Button>
-            <Button fx:id="applyUpdateId" layoutX="342.0" layoutY="53.0" mnemonicParsing="false" onAction="#UpdatePrepodavatelInTableClick" styleClass="idApplyImage" stylesheets="@css/Menu.css" visible="false" AnchorPane.topAnchor="53.0">
+            <Button fx:id="applyUpdateId" layoutX="342.0" layoutY="53.0" mnemonicParsing="false" onAction="#UpdatePrepodavatelInTableClick" styleClass="idApplyButton" stylesheets="@css/Menu.css" visible="false" AnchorPane.topAnchor="53.0">
                <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" styleClass="idApplyButton">
+                  <ImageView fitHeight="38.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/free-icon-correct-symbol-25404.png" />
                      </image>

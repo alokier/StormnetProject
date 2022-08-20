@@ -2,7 +2,9 @@ package com.strormnet.project.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
+
+import com.strormnet.project.servant.stringConvertors.CustomIntegerStringConverter;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -74,7 +76,7 @@ public class AdminPrepodavatelController {
     private TableColumn<Prepodavatel, Integer> phoneNumber;
 
     @FXML
-    private TableColumn<Prepodavatel, Integer> stavkaPerHour;
+    private TableColumn<Prepodavatel, Double> stavkaPerHour;
 
     @FXML
     private Button cancelSaveID;
@@ -84,23 +86,31 @@ public class AdminPrepodavatelController {
 
     private UpdateDemonThread updateDemonThread = new UpdateDemonThread();
 
+    private List<Prepodavatel> all;
+
     @FXML
     void initialize() {
         PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
         //TODO Разобраться почему не отображает isAdmin.
-        //TODO добавить демона который обновляет таблицу
         String s = addPrepId.getText();
-        List<Prepodavatel> all = prepodavatelRepository.getAll();
+        all = prepodavatelRepository.getAll();
         tableView.getItems().addAll(all);
         fio.setCellValueFactory(new PropertyValueFactory<Prepodavatel, String>("fio"));
-        stavkaPerHour.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("stavkaPerHour"));
+        stavkaPerHour.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Double>("stavkaPerHour"));
         experience.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("experience"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("phoneNumber"));
         password.setCellValueFactory(new PropertyValueFactory<Prepodavatel, String>("password"));
         isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, CheckBox>("admin"));
         updateDemonThread.setTableView(tableView);
         updateDemonThread.start();
+        setupFioColumn();
+        setupExperienceColumn();
+        //TODO Сделать редактирование других колонок
 
+
+    }
+
+    private void setupFioColumn() {
         fio.setCellFactory(TextFieldTableCell.<Prepodavatel>forTableColumn());
         fio.setOnEditCommit(
                 (TableColumn.CellEditEvent<Prepodavatel, String> t) -> {
@@ -108,28 +118,57 @@ public class AdminPrepodavatelController {
                             t.getTablePosition().getRow())
                     ).setFio(t.getNewValue());
                     applyUpdateId.setVisible(true);
+                    cancelSaveID.setVisible(true);
+                    fio.setCellFactory(Set("-fx-background-color:yellow;"));
                 });
+    }
 
+    private void setupExperienceColumn() {
+        experience.setCellFactory(TextFieldTableCell.<Prepodavatel, Integer>forTableColumn(new CustomIntegerStringConverter(tableView, applyUpdateId, cancelSaveID)));
+        experience.setOnEditCommit(event -> {
+            try {
+                ((Prepodavatel) event.getTableView().getItems().get(
+                        event.getTablePosition().getRow())
+                ).setExperience(event.getNewValue());
+                applyUpdateId.setVisible(true);
+                cancelSaveID.setVisible(true);
+
+            } catch (NumberFormatException e) {
+                Servant.createAlert("Ошибка", "Проверьте введённые данные в поле опыт", Alert.AlertType.ERROR);
+            }
+        });
     }
 
     @FXML
     void onActionAddPrep(ActionEvent event) {
         try {
-            Servant.onTheNextSceneWithoutObj(Constant.ADMIN_PREP_ADD_PATH,"Add",260, 420, true, addPrepId);
+            Servant.onTheNextSceneWithoutObj(Constant.ADMIN_PREP_ADD_PATH, "Add", 260, 420, true, addPrepId);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     /*Разрешить обновить запись из таблицы и отменить запись в базу из таблицы*/
     @FXML
     void UpdatePrepodavatelInTableClick(ActionEvent event) {
-
+        //TODO Сделать обновление по нажатию на кнопку
     }
 
     @FXML
     void CancelUpdatePrepodavatelInTableClick(ActionEvent event) {
-
+        try {
+            PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
+            List<Prepodavatel> all = prepodavatelRepository.getAll();
+            Prepodavatel selectedItem = tableView.getSelectionModel().getSelectedItem();
+            Prepodavatel prepodavatel1 = Stream.of(all)
+                    .flatMap(gen -> gen.stream().filter(prepodavatel -> prepodavatel.getId() == selectedItem.getId()))
+                    .findAny().get();
+            tableView.getItems().set(tableView.getSelectionModel().getSelectedIndex(), prepodavatel1);
+        } catch (RuntimeException e) {
+            Servant.createAlert("Ошибка", "Объект не выбран, или редактирование не завершено", Alert.AlertType.INFORMATION);
+        }
     }
+
     /*Конец обновления и отмены */
 
 
@@ -156,7 +195,7 @@ public class AdminPrepodavatelController {
             } else {
                 alert.close();
             }
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             Servant.createAlert("Пользователь не выбран", "Пользователь не выбран!", Alert.AlertType.INFORMATION);
         }
     }
@@ -181,7 +220,7 @@ public class AdminPrepodavatelController {
             } else {
                 alert.close();
             }
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             Servant.createAlert("Пользователь не выбран", "Пользователь не выбран!", Alert.AlertType.INFORMATION);
         } catch (FileNotFoundException e) {
             PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
@@ -190,5 +229,4 @@ public class AdminPrepodavatelController {
             prepodavatelRepository.resetPassword(prepodavatel.getId(), newPassword);
         }
     }
-
 }

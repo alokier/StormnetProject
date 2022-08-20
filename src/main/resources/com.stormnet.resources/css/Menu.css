@@ -25,6 +25,7 @@
 -fx-border-color:transparent;
 -fx-text-fill:transparent;
 }
+
 .idGeneratePassword:pressed{
 -fx-effect:innershadow(two-pass-box , #00acff , 0 , 255.0 , 255.0 , 127.0);
 -fx-background-color:transparent;
@@ -32,7 +33,7 @@
 -fx-text-fill:transparent;
 }
 
-.idApplyImage{
+.idApplyButton{
 -fx-effect:innershadow(two-pass-box , #0ca2e1 , 0 , 255.0 , 255.0 , 127.0);
 -fx-background-color:transparent;
 -fx-border-color:transparent;
@@ -40,7 +41,7 @@
 }
 
 .idApplyButton:pressed{
--fx-effect:innershadow(two-pass-box , #2a83a4 , 0 , 255.0 , 255.0 , 127.0);
+-fx-effect:innershadow(two-pass-box , green , 0 , 255.0 , 255.0 , 127.0);
 -fx-background-color:transparent;
 -fx-border-color:transparent;
 -fx-text-fill:transparent;

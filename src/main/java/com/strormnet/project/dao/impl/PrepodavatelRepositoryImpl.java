@@ -116,4 +116,21 @@ public class PrepodavatelRepositoryImpl implements PrepodavatelRepository {
             e.printStackTrace();
         }
     }
+
+    public void update(Prepodavatel prepodavatel) {
+        Connection connection = new ConnectDao().getConnection();
+        String sqlCommand = "update prepodavatel set fio = ?, stavka_per_hour = ?, experience = ?, phone_number = ?, password = ?, isAdmin = ? where id = ?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand)) {
+            preparedStatement.setString(1, prepodavatel.getFio());
+            preparedStatement.setDouble(2, prepodavatel.getStavkaPerHour());
+            preparedStatement.setInt(3, prepodavatel.getExperience());
+            preparedStatement.setInt(4, prepodavatel.getPhoneNumber());
+            preparedStatement.setString(5, prepodavatel.getPassword());
+            preparedStatement.setBoolean(6, prepodavatel.getAdmin());
+            preparedStatement.setInt(7, prepodavatel.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
