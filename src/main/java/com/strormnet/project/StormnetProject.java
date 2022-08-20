@@ -1,5 +1,6 @@
 package com.strormnet.project;
 
+import com.strormnet.project.dao.ConnectDao;
 import com.strormnet.project.dao.impl.PredmetRepositoryImpl;
 import com.strormnet.project.enums.PredmetType;
 import com.strormnet.project.model.Predmet;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class StormnetProject extends javafx.application.Application {
@@ -21,9 +23,6 @@ public class StormnetProject extends javafx.application.Application {
         stage.setTitle("Авторизация");
         stage.setScene(scene);
         stage.show();
-        Predmet predmet = new Predmet("TBD", PredmetType.QA);
-        PredmetRepositoryImpl predmetRepository = new PredmetRepositoryImpl();
-        predmetRepository.updateById(2, predmet);
     }
 
     public static void main(String[] args) throws InterruptedException {

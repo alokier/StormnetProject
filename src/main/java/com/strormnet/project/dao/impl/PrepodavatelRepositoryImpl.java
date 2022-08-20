@@ -105,4 +105,15 @@ public class PrepodavatelRepositoryImpl implements PrepodavatelRepository {
         }
         return null;
     }
+    public void resetPassword(Integer id, String newPassword){
+        Connection connection = new ConnectDao().getConnection();
+        String sqlCommand = "update prepodavatel set password = ? where id = ?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand)) {
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

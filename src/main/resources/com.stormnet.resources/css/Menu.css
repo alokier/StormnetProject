@@ -32,6 +32,33 @@
 -fx-text-fill:transparent;
 }
 
+.idApplyImage{
+-fx-effect:innershadow(two-pass-box , #0ca2e1 , 0 , 255.0 , 255.0 , 127.0);
+-fx-background-color:transparent;
+-fx-border-color:transparent;
+-fx-text-fill:transparent;
+}
+
+.idApplyButton:pressed{
+-fx-effect:innershadow(two-pass-box , #2a83a4 , 0 , 255.0 , 255.0 , 127.0);
+-fx-background-color:transparent;
+-fx-border-color:transparent;
+-fx-text-fill:transparent;
+}
+
+.cancelImage{
+-fx-effect:innershadow(two-pass-box , red , 0 , 255.0 , 255.0 , 127.0);
+-fx-background-color:transparent;
+-fx-border-color:transparent;
+-fx-text-fill:transparent;
+}
+
+.cancelImage:pressed{
+-fx-effect:innershadow(two-pass-box , #2a83a4 , 0 , 255.0 , 255.0 , 127.0);
+-fx-background-color:transparent;
+-fx-border-color:transparent;
+-fx-text-fill:transparent;
+}
 
 
 #exitButton:hover{

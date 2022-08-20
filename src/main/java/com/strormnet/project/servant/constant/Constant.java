@@ -15,6 +15,7 @@ public abstract class Constant {
 
     /*Пути базы данных*/
     public static final String DATABASE_PROPERTY_PATH = "resources\\database.properties";
+    public static final String OTHER_INFO_PATH = "resources\\OtherInfo.properties";
     public static final String DATABASE_INFO = "resources\\DataBaseInfo.properties";
 
 

@@ -12,9 +12,14 @@ public class UpdateDemonThread extends Thread {
     private Integer newValue;
     private Integer oldValueFromTheTable;
     private TableView<Prepodavatel> tableView;
+    private Boolean resetPassword = false;
 
     public UpdateDemonThread(TableView<Prepodavatel> tableView) {
         this.tableView = tableView;
+        setDaemon(true);
+    }
+
+    public UpdateDemonThread() {
         setDaemon(true);
     }
 
@@ -27,13 +32,38 @@ public class UpdateDemonThread extends Thread {
             newValue = prepodavatelRepository.getPrepodavatelsCount();
             System.out.println(newValue);
             if(newValue != oldValueFromTheTable){
-                List<Prepodavatel> all = prepodavatelRepository.getAll();
-                tableView.getItems().clear();
-                tableView.getItems().addAll(all);
+                updateTable(tableView);
                 oldValueFromTheTable = newValue;
+            }
+            if(resetPassword){
+                updateTable(tableView);
+                setResetPassword(false);
             }
         }
 
+    }
+
+    public Boolean getResetPassword() {
+        return resetPassword;
+    }
+
+    public void setResetPassword(Boolean resetPassword) {
+        this.resetPassword = resetPassword;
+    }
+
+    public TableView<Prepodavatel> getTableView() {
+        return tableView;
+    }
+
+    public void setTableView(TableView<Prepodavatel> tableView) {
+        this.tableView = tableView;
+    }
+
+    private static void updateTable(TableView tableView){
+        PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
+        List<Prepodavatel> all = prepodavatelRepository.getAll();
+        tableView.getItems().clear();
+        tableView.getItems().addAll(all);
     }
 }
 

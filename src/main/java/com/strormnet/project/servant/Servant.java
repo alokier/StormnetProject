@@ -6,11 +6,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Servant{
@@ -60,6 +71,7 @@ public class Servant{
             stage2.show();
         }
     }
+
     public static <T extends Labeled> Stage getCurrentStage(T field){
         return (Stage) field.getScene().getWindow();
     }
@@ -69,12 +81,59 @@ public class Servant{
         stage.close();
     }
 
+    public static <T extends Labeled> void toTheAuthorisationScene(String resource, String title, T field) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(StormnetProject.class.getResource(resource));
+        Scene scene = new Scene(fxmlLoader.load(), 540, 460);
+        scene.getStylesheets().add(StormnetProject.class.getResource(Constant.CSS_MENU).toExternalForm());
+        Stage stage2 = new Stage();
+        stage2.setTitle(title);
+        stage2.setScene(scene);
+        stage2.show();
+        Servant.closeScene(field);
+    }
+
     public static void createAlert(String header, String contentText, Alert.AlertType type){
 
         Alert alert = new Alert(type);
         alert.setHeaderText(header);
         alert.setContentText(contentText);
         alert.showAndWait();
+    }
+
+    public static void writeFile(String url, String username, String password) throws FileNotFoundException {
+
+        try(FileWriter fileWriter = new FileWriter(Constant.DATABASE_PROPERTY_PATH)) {
+            fileWriter.write(url + "\n");
+            fileWriter.write(username + "\n");
+            fileWriter.write(password + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeOtherInfo(String path,String...info) throws FileNotFoundException {
+
+        try(FileWriter fileWriter = new FileWriter(path)) {
+            Stream.of(info).forEach(gen -> {
+                try {
+                    fileWriter.write(gen + "\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String readResetToPassword(String path) throws FileNotFoundException {
+        Properties props = new Properties();
+        try (InputStream in = Files.newInputStream(Paths.get(path))) {
+            props.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return props.getProperty("resetToPassword");
     }
 
    /* public static void onNextScene(String resource, String title, User user, Integer v, Integer v1) throws IOException {

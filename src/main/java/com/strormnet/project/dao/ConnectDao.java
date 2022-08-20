@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Properties;
+import java.util.stream.Stream;
 
 public class ConnectDao {
 
@@ -27,17 +28,6 @@ public class ConnectDao {
             ex.printStackTrace();
         }
         return null;
-    }
-
-    public static void writeFile(String url, String username, String password) throws FileNotFoundException {
-
-        try(FileWriter fileWriter = new FileWriter(Constant.DATABASE_PROPERTY_PATH)) {
-            fileWriter.write(url + "\n");
-            fileWriter.write(username + "\n");
-            fileWriter.write(password + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 //    public void getColumnName() throws FileNotFoundException, SQLException {
 //        Connection connection = getConnection();

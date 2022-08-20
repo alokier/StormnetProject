@@ -92,7 +92,11 @@ public class GeneralMenuController {
     /*..............Кнопка Выхода................*/
     @FXML
     void Exit(ActionEvent event) {
-        Servant.closeScene(fioLabel);
+        try {
+            Servant.toTheAuthorisationScene(Constant.AUTHORISATION_PATH,"Authorisation", fioLabel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /*...........*/
