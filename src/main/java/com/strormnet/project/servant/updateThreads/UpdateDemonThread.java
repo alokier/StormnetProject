@@ -25,17 +25,17 @@ public class UpdateDemonThread extends Thread {
 
     @Override
     public void run() {
-        PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
-        oldValueFromTheTable = prepodavatelRepository.getPrepodavatelsCount();
-        Stage stage = (Stage) tableView.getScene().getWindow();
         try {
-            sleep(150);
+            sleep(300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
+        oldValueFromTheTable = prepodavatelRepository.getPrepodavatelsCount();
+        Stage stage = (Stage) tableView.getScene().getWindow();
         while(stage.isShowing()) {
             newValue = prepodavatelRepository.getPrepodavatelsCount();
-            System.out.println(newValue);
+//            System.out.println(newValue);
             if(newValue != oldValueFromTheTable){
                 updateTable(tableView);
                 oldValueFromTheTable = newValue;

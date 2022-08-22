@@ -1,5 +1,8 @@
 package com.strormnet.project.model.users;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import java.io.Serializable;
 
 public abstract class User implements Serializable {
@@ -9,6 +12,7 @@ public abstract class User implements Serializable {
     private Integer phoneNumber;
     private transient String password;
     private Boolean admin;
+    private BooleanProperty test;
 
     public User() {
     }
@@ -66,6 +70,10 @@ public abstract class User implements Serializable {
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+    }
+
+    public boolean isTest() {
+        return test.get();
     }
 
     @Override

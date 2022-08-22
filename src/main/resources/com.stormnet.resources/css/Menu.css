@@ -65,7 +65,17 @@
 -fx-font-family: impact;
 -fx-text-fill: #0ca2e1;
 }
+.deleteButton{
+-fx-background-color: #890000;
+}
 
+.deleteButton:hover{
+-fx-background-color: #1f5f76;
+}
+
+.deleteButton:pressed{
+-fx-background-color: F39C63;
+}
 
 #exitButton:hover{
 -fx-background-color: #1f5f76;

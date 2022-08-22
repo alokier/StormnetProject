@@ -2,6 +2,8 @@ package com.strormnet.project.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+
+import com.strormnet.project.model.PersonUnemployedValueFactory;
 import com.strormnet.project.servant.stringConvertors.ExperienceCustomIntegerStringConverter;
 import java.util.List;
 import java.util.Objects;
@@ -15,8 +17,12 @@ import com.strormnet.project.servant.constant.Constant;
 import com.strormnet.project.servant.stringConvertors.PhoneNumberCustomIntegerStringConverter;
 import com.strormnet.project.servant.stringConvertors.StavkaPerHourCustomDoubleStringConverter;
 import com.strormnet.project.servant.updateThreads.UpdateDemonThread;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -69,7 +75,7 @@ public class AdminPrepodavatelController {
     private TableColumn<Prepodavatel, String> fio;
 
     @FXML
-    private TableColumn<Prepodavatel, Boolean> isAdmin;
+    private TableColumn<Prepodavatel, CheckBox> isAdmin;
 
     @FXML
     private TableColumn<Prepodavatel, String> password;
@@ -102,7 +108,7 @@ public class AdminPrepodavatelController {
         experience.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("experience"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Integer>("phoneNumber"));
         password.setCellValueFactory(new PropertyValueFactory<Prepodavatel, String>("password"));
-        isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Boolean>("admin"));
+//        isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Boolean>("admin"));
         updateDemonThread.setTableView(tableView);
         updateDemonThread.start();
         setupFioColumn();
@@ -110,7 +116,6 @@ public class AdminPrepodavatelController {
         setupExperienceColumn();
         setupPhoneNumberColumn();
         setupAdminColumn();
-        //TODO Сделать редактирование других колонок
 
 
     }
@@ -154,28 +159,10 @@ public class AdminPrepodavatelController {
         });
     }
   private void setupAdminColumn() {
-
-      isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Boolean>("admin"));
-      final Callback<TableColumn<Prepodavatel, Boolean>, TableCell<Prepodavatel, Boolean>> cellFactory = CheckBoxTableCell.forTableColumn(isAdmin);
-      isAdmin.setCellFactory(new Callback<TableColumn<Prepodavatel, Boolean>, TableCell<Prepodavatel, Boolean>>() {
-          @Override
-          public TableCell<Prepodavatel, Boolean> call(TableColumn<Prepodavatel, Boolean> column) {
-              TableCell<Prepodavatel, Boolean> cell = cellFactory.call(column);
-              cell.setAlignment(Pos.CENTER);
-              return cell;
-          }
-      });
-      isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Boolean>("admin"));
-      isAdmin.setCellFactory(cellFactory);
-      isAdmin.setEditable(true);
-
-      isAdmin.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Prepodavatel,Boolean>>() {
-          @Override
-          public void handle(TableColumn.CellEditEvent<Prepodavatel, Boolean> event) {
-              System.out.println("Edit commit");
-          }
-      });
+      TableColumn<Prepodavatel, CheckBox> column = (TableColumn<Prepodavatel, CheckBox>) tableView.getColumns().get(0);
+      isAdmin.setCellValueFactory(new PersonUnemployedValueFactory(applyUpdateId,cancelSaveID));
   }
+
     @FXML
     void onActionAddPrep(ActionEvent event) {
         try {
@@ -196,8 +183,6 @@ public class AdminPrepodavatelController {
         } catch (RuntimeException e) {
             Servant.createAlert("Ошибка", "Объект не выбран, или редактирование не завершено", Alert.AlertType.INFORMATION);
         }
-
-        //TODO Сделать обновление по нажатию на кнопку
     }
 
     @FXML

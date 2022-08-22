@@ -16,6 +16,9 @@ import java.io.IOException;
 public class GeneralMenuController {
 
     @FXML
+    private Button adminPredmetsButton;
+
+    @FXML
     private Button ButtonGetGroups;
 
     @FXML
@@ -126,6 +129,15 @@ public class GeneralMenuController {
             e.printStackTrace();
         }
     }
+    @FXML
+    void AdminPredmetsButton(ActionEvent event) {
+    try {
+        Servant.onTheNextSceneWithoutObj(Constant.ADMIN_PREDMET_PATH,"Predmets",726,410,true, fioLabel);
+        } catch (IOException e) {
+        e.printStackTrace();
+        }
+    }
+
 
     /*...........*/
 

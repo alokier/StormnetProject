@@ -9,6 +9,7 @@ public abstract class Constant {
     public static final String ADMIN_PREP_ADD_PATH = "/com.stormnet.resources/AdminPrepodavatelAddModal.fxml";
     public static final String PREP_LESSON_START_PATH = "/com.stormnet.resources/PrepodavatelStartLesson.fxml";
     public static final String MODAL_CONFIRM_WINDOW_PATH = "/com.stormnet.resources/ModalConfirmationWindow.fxml";
+    public static final String ADMIN_PREDMET_PATH = "/com.stormnet.resources/AdminPredmetEdit.fxml";
 
 
 
