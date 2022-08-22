@@ -2,28 +2,24 @@ package com.strormnet.project.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-
-//import com.strormnet.project.servant.stringConvertors.AdminCustomStringConverter;
 import com.strormnet.project.servant.stringConvertors.ExperienceCustomIntegerStringConverter;
-
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
-
 import com.strormnet.project.dao.impl.PrepodavatelRepositoryImpl;
 import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.constant.Constant;
-
 import com.strormnet.project.servant.stringConvertors.PhoneNumberCustomIntegerStringConverter;
 import com.strormnet.project.servant.stringConvertors.StavkaPerHourCustomDoubleStringConverter;
 import com.strormnet.project.servant.updateThreads.UpdateDemonThread;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
-
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -113,7 +109,7 @@ public class AdminPrepodavatelController {
         setupStavkaPerHour();
         setupExperienceColumn();
         setupPhoneNumberColumn();
-//        setupAdminColumn();
+        setupAdminColumn();
         //TODO Сделать редактирование других колонок
 
 
@@ -126,8 +122,7 @@ public class AdminPrepodavatelController {
                     ((Prepodavatel) t.getTableView().getItems().get(
                             t.getTablePosition().getRow())
                     ).setFio(t.getNewValue());
-                    applyUpdateId.setVisible(true);
-                    cancelSaveID.setVisible(true);
+                    Servant.setVisibility(true, applyUpdateId, cancelSaveID);
                 });
     }
     private void setupStavkaPerHour(){
@@ -136,8 +131,7 @@ public class AdminPrepodavatelController {
             ((Prepodavatel) event.getTableView().getItems().get(
                     event.getTablePosition().getRow())
             ).setStavkaPerHour(event.getNewValue());
-            applyUpdateId.setVisible(true);
-            cancelSaveID.setVisible(true);
+            Servant.setVisibility(true, applyUpdateId, cancelSaveID);
         });
     }
     private void setupExperienceColumn() {
@@ -146,8 +140,7 @@ public class AdminPrepodavatelController {
             ((Prepodavatel) event.getTableView().getItems().get(
                     event.getTablePosition().getRow())
             ).setExperience(event.getNewValue());
-            applyUpdateId.setVisible(true);
-            cancelSaveID.setVisible(true);
+            Servant.setVisibility(true, applyUpdateId, cancelSaveID);
         });
     }
 
@@ -157,21 +150,32 @@ public class AdminPrepodavatelController {
                 ((Prepodavatel) event.getTableView().getItems().get(
                         event.getTablePosition().getRow())
                 ).setExperience(event.getNewValue());
-                applyUpdateId.setVisible(true);
-                cancelSaveID.setVisible(true);
+            Servant.setVisibility(true, applyUpdateId, cancelSaveID);
         });
     }
-//    private void setupAdminColumn(){
-//        isAdmin.setCellFactory(CheckBoxTableCell.<Prepodavatel, Boolean>forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
-//            @Override
-//            public ObservableValue<Boolean> call(Integer integer) {
-//
-//                return null;
-//            }
-//        }));
-//
-//    }
+  private void setupAdminColumn() {
 
+      isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Boolean>("admin"));
+      final Callback<TableColumn<Prepodavatel, Boolean>, TableCell<Prepodavatel, Boolean>> cellFactory = CheckBoxTableCell.forTableColumn(isAdmin);
+      isAdmin.setCellFactory(new Callback<TableColumn<Prepodavatel, Boolean>, TableCell<Prepodavatel, Boolean>>() {
+          @Override
+          public TableCell<Prepodavatel, Boolean> call(TableColumn<Prepodavatel, Boolean> column) {
+              TableCell<Prepodavatel, Boolean> cell = cellFactory.call(column);
+              cell.setAlignment(Pos.CENTER);
+              return cell;
+          }
+      });
+      isAdmin.setCellValueFactory(new PropertyValueFactory<Prepodavatel, Boolean>("admin"));
+      isAdmin.setCellFactory(cellFactory);
+      isAdmin.setEditable(true);
+
+      isAdmin.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Prepodavatel,Boolean>>() {
+          @Override
+          public void handle(TableColumn.CellEditEvent<Prepodavatel, Boolean> event) {
+              System.out.println("Edit commit");
+          }
+      });
+  }
     @FXML
     void onActionAddPrep(ActionEvent event) {
         try {
@@ -181,9 +185,18 @@ public class AdminPrepodavatelController {
         }
     }
 
-    /*Разрешить обновить запись из таблицы и отменить запись в базу из таблицы*/
+    /*обновить запись из таблицы и отменить запись в базу из таблицы*/
     @FXML
     void UpdatePrepodavatelInTableClick(ActionEvent event) {
+        try{
+            PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
+            Prepodavatel selectedItem = tableView.getSelectionModel().getSelectedItem();
+            prepodavatelRepository.update(selectedItem);
+            Servant.createAlert("Пользователь обновлён", "Выбранный пользователь был обновлён", Alert.AlertType.INFORMATION);
+        } catch (RuntimeException e) {
+            Servant.createAlert("Ошибка", "Объект не выбран, или редактирование не завершено", Alert.AlertType.INFORMATION);
+        }
+
         //TODO Сделать обновление по нажатию на кнопку
     }
 
@@ -194,7 +207,8 @@ public class AdminPrepodavatelController {
             List<Prepodavatel> all = prepodavatelRepository.getAll();
             Prepodavatel selectedItem = tableView.getSelectionModel().getSelectedItem();
             Prepodavatel prepodavatel1 = Stream.of(all)
-                    .flatMap(gen -> gen.stream().filter(prepodavatel -> prepodavatel.getId() == selectedItem.getId()))
+                    .flatMap(gen -> gen.stream()
+                    .filter(prepodavatel -> Objects.equals(prepodavatel.getId(), selectedItem.getId())))
                     .findAny().get();
             tableView.getItems().set(tableView.getSelectionModel().getSelectedIndex(), prepodavatel1);
         } catch (RuntimeException e) {

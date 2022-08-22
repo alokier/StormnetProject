@@ -1,9 +1,5 @@
 package com.strormnet.project.controller;
-import com.strormnet.project.StormnetProject;
-import com.strormnet.project.dao.impl.PredmetRepositoryImpl;
 import com.strormnet.project.dao.impl.PrepodavatelRepositoryImpl;
-import com.strormnet.project.enums.PredmetType;
-import com.strormnet.project.model.Predmet;
 import com.strormnet.project.model.users.Prepodavatel;
 import com.strormnet.project.servant.Servant;
 import com.strormnet.project.servant.constant.Constant;
@@ -11,16 +7,12 @@ import com.strormnet.project.servant.nextScene.ToModalConfirmWindowFromPrepAddCo
 import com.strormnet.project.servant.validation.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 
-public class AdminPrepodavatelModalAdd {
+public class AdminPrepodavatelModalAddController {
 
     @FXML
     private Label checkAllFieldsLabel;
@@ -96,7 +88,6 @@ public class AdminPrepodavatelModalAdd {
         } else {
             checkAllFieldsLabel.setVisible(true);
         }
-        //TODO сделать добавить пользователя в базу данных
     }
 
     @FXML

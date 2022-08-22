@@ -61,6 +61,11 @@
 -fx-text-fill:transparent;
 }
 
+.standartLabel{
+-fx-font-family: impact;
+-fx-text-fill: #0ca2e1;
+}
+
 
 #exitButton:hover{
 -fx-background-color: #1f5f76;

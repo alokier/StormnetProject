@@ -28,6 +28,11 @@ public class UpdateDemonThread extends Thread {
         PrepodavatelRepositoryImpl prepodavatelRepository = new PrepodavatelRepositoryImpl();
         oldValueFromTheTable = prepodavatelRepository.getPrepodavatelsCount();
         Stage stage = (Stage) tableView.getScene().getWindow();
+        try {
+            sleep(150);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         while(stage.isShowing()) {
             newValue = prepodavatelRepository.getPrepodavatelsCount();
             System.out.println(newValue);

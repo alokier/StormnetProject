@@ -135,6 +135,9 @@ public class Servant{
         }
         return props.getProperty("resetToPassword");
     }
+    public static<T extends Button> void setVisibility(Boolean visible,T...fields){
+        Stream.of(fields).forEach(gen -> gen.setVisible(visible));
+    }
 
    /* public static void onNextScene(String resource, String title, User user, Integer v, Integer v1) throws IOException {
         Stage stage = new Stage();
